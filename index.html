@@ -1,437 +1,575 @@
-<html data-type="html" data-identifier="be2136ea-25a0-4313-aea9-0089bae65039" data-title="ObraTech - Asistente para jefe de obra" data-version="1" width="600" height="800">
+<html data-type="html" data-identifier="e5a2b8c4-61d7-4f93-8b0e-3c7a9d1f4e26" data-title="ObraTech - App completa de jefe de obra" data-version="1" width="600" height="800">
 <body>
 <style>
-  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
-  .app{max-width:680px;margin:0 auto;padding:14px 14px 96px}
-  header{padding:8px 0}
-  h1{font-size:24px;margin:0;color:#38bdf8}
-  .sub{margin:3px 0 0;color:#94a3b8;font-size:13px}
-  .panel{display:none;animation:fade .25s ease}
-  .panel.active{display:block}
-  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  .card{background:#1e293b;border-radius:16px;padding:14px;margin-top:12px;border:1px solid #334155}
-  h2{font-size:17px;margin:0 0 4px;color:#f8fafc}
-  h3{font-size:14px;margin:0 0 8px;color:#38bdf8}
-  label{display:block;font-size:12px;color:#94a3b8;margin:9px 0 3px}
-  input,select{width:100%;padding:12px;font-size:16px;border-radius:12px;border:1px solid #475569;background:#0f172a;color:#f1f5f9;outline:none}
-  input:focus,select:focus{border-color:#38bdf8}
-  button.calc{width:100%;margin-top:12px;padding:13px;font-size:16px;font-weight:600;border:none;border-radius:12px;background:#0ea5e9;color:#fff;cursor:pointer}
-  button.calc:active{background:#0284c7}
-  .result{margin-top:10px;padding:12px;border-radius:12px;background:#0f172a;border-left:4px solid #22c55e;font-size:14px;line-height:1.6;min-height:18px}
-  .hint{font-size:12px;color:#94a3b8;margin:4px 0 0;line-height:1.5}
-  .warn{font-size:12px;color:#fbbf24;background:#422006;border-radius:10px;padding:8px 10px;margin-top:10px;line-height:1.5}
-  .row{display:flex;gap:10px}
-  .row>div{flex:1}
-  .chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
-  .chip{flex:0 0 auto;padding:9px 13px;border-radius:20px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:13px;cursor:pointer}
-  .chip.active{background:#0ea5e9;border-color:#0ea5e9;color:#fff}
-  svg{width:100%;height:auto;background:#0b1220;border-radius:12px;display:block}
-  svg .lb{fill:#cbd5e1;font-size:9px}
-  svg .lb2{fill:#94a3b8;font-size:8px}
-  .mk{cursor:pointer}
-  .mk circle{fill:#0ea5e9;stroke:#fff;stroke-width:1.5}
-  .mk text{fill:#fff;font-size:10px;font-weight:700;pointer-events:none}
-  .mk.sel circle{fill:#f43f5e}
-  .info{margin-top:10px;padding:12px;border-radius:12px;background:#0f172a;border-left:4px solid #38bdf8;font-size:14px;line-height:1.6}
-  .info strong{color:#f8fafc;font-size:15px}
-  .plist{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
-  .plist button{text-align:left;padding:9px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#cbd5e1;font-size:12px;cursor:pointer}
-  .plist button.sel{border-color:#f43f5e;color:#fff}
-  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
-  td,th{padding:6px;border-bottom:1px solid #334155;text-align:center}
-  th{color:#38bdf8;font-weight:600}
-  .chat{max-height:46vh;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:4px 0}
-  .msg{padding:10px 12px;border-radius:14px;font-size:14px;line-height:1.55;max-width:92%}
-  .msg.user{align-self:flex-end;background:#0ea5e9;color:#fff}
-  .msg.bot{align-self:flex-start;background:#0f172a;border:1px solid #334155}
-  .ask{display:flex;gap:8px;margin-top:10px}
-  .ask button{padding:0 18px;border:none;border-radius:12px;background:#0ea5e9;color:#fff;font-weight:700;font-size:16px;cursor:pointer}
-  .chk{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #334155;font-size:14px;line-height:1.4}
-  .chk input{width:22px;height:22px;flex:0 0 22px;margin:0;padding:0}
-  nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:#1e293b;border-top:1px solid #334155;padding:6px 6px calc(6px + env(safe-area-inset-bottom));justify-content:center}
-  nav button{flex:1;max-width:150px;background:none;border:none;color:#94a3b8;font-size:11px;padding:6px 2px;cursor:pointer;border-radius:10px}
-  nav button .ic{display:block;font-size:22px}
-  nav button.active{color:#38bdf8;background:#0f172a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
+.app{max-width:700px;margin:0 auto;padding:14px 14px 100px}
+h1{font-size:24px;margin:6px 0 0;color:#38bdf8}
+.sub{margin:3px 0 0;color:#94a3b8;font-size:13px}
+.panel{display:none;animation:fade .25s ease}.panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:#1e293b;border-radius:16px;padding:14px;margin-top:12px;border:1px solid #334155}
+h2{font-size:17px;margin:0 0 4px;color:#f8fafc}
+h3{font-size:18px;margin:14px 0 6px;color:#f8fafc}
+label{display:block;font-size:12px;color:#94a3b8;margin:9px 0 3px}
+input,select{width:100%;padding:12px;font-size:16px;border-radius:12px;border:1px solid #475569;background:#0f172a;color:#f1f5f9;outline:none}
+input:focus,select:focus{border-color:#38bdf8}
+button.calc{width:100%;margin-top:12px;padding:13px;font-size:16px;font-weight:600;border:none;border-radius:12px;background:#0ea5e9;color:#fff;cursor:pointer}
+.result{margin-top:10px;padding:12px;border-radius:12px;background:#0f172a;border-left:4px solid #22c55e;font-size:14px;line-height:1.6}
+.result:empty{display:none}
+.hint{font-size:12px;color:#94a3b8;margin:4px 0 0;line-height:1.5}
+.warn{font-size:12px;color:#fbbf24;background:#422006;border-radius:10px;padding:8px 10px;margin-top:12px;line-height:1.5}
+.row{display:flex;gap:10px}.row>div{flex:1}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.chip{flex:0 0 auto;padding:9px 13px;border-radius:20px;border:1px solid #475569;background:#0f172a;color:#cbd5e1;font-size:13px;cursor:pointer}
+.chip.active{background:#0ea5e9;border-color:#0ea5e9;color:#fff}
+.pic{width:100%;max-height:74vh;object-fit:contain;border-radius:14px;background:#f4f3ee;border:1px solid #334155;display:block;min-height:220px}
+.sch{display:none}.sch.active{display:block}
+details{background:#0f172a;border:1px solid #334155;border-radius:12px;margin-top:8px;padding:0 12px}
+summary{padding:12px 0;font-weight:600;font-size:14px;color:#f8fafc;cursor:pointer}
+details .body{padding-bottom:10px;font-size:13px;line-height:1.55;color:#cbd5e1}
+details ul,details ol{margin:4px 0;padding-left:18px}details li{margin-bottom:4px}
+.notes{margin-top:12px;padding:12px;border-radius:12px;background:#0b2a3a;border-left:4px solid #38bdf8;font-size:13px;line-height:1.6;color:#bae6fd}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+td,th{padding:6px;border-bottom:1px solid #334155;text-align:center}th{color:#38bdf8}
+.grp{display:none}.grp.active{display:block}
+.chat{max-height:46vh;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:4px 0;margin-top:8px}
+.msg{padding:10px 12px;border-radius:14px;font-size:14px;line-height:1.55;max-width:94%}
+.msg.user{align-self:flex-end;background:#0ea5e9;color:#fff}
+.msg.bot{align-self:flex-start;background:#0f172a;border:1px solid #334155}
+.msg.ia{white-space:pre-wrap}
+.ask{display:flex;gap:8px;margin-top:10px}
+.ask button{padding:0 18px;border:none;border-radius:12px;background:#0ea5e9;color:#fff;font-weight:700;font-size:16px;cursor:pointer}
+.badge{display:inline-block;font-size:11px;background:#14532d;color:#bbf7d0;border-radius:8px;padding:2px 8px;margin-left:6px}
+.badge.off{background:#3f3f46;color:#d4d4d8}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #334155;font-size:14px;line-height:1.4}
+.chk input{width:22px;height:22px;flex:0 0 22px;margin:0;padding:0}
+.lcard{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:#0f172a;border:1px solid #334155;border-radius:16px;padding:14px;margin-top:10px;color:#e2e8f0;cursor:pointer}
+.lcard .ic{font-size:28px;flex:0 0 42px;text-align:center}
+.lcard b{display:block;font-size:15px;color:#f8fafc}
+.lcard .d{display:block;font-size:12px;color:#94a3b8;margin-top:2px}
+.top{display:flex;align-items:center;gap:10px}
+.back{background:#0f172a;border:1px solid #334155;color:#e2e8f0;border-radius:12px;padding:9px 13px;font-size:14px;cursor:pointer}
+.bar{height:6px;background:#334155;border-radius:4px;margin:12px 0;overflow:hidden}
+.bar i{display:block;height:100%;background:#38bdf8;width:0;transition:width .3s}
+.view{display:none}.view.active{display:block}
+.lesson{display:none}.lesson.active{display:block}
+.step{display:none;animation:fade .3s ease}.step.active{display:block}
+.step p{font-size:15px;line-height:1.6;margin:0;color:#cbd5e1}
+.tip{margin-top:12px;padding:10px 12px;border-radius:12px;background:#0b2a3a;border-left:4px solid #38bdf8;font-size:13px;line-height:1.5;color:#bae6fd}
+.lnav{display:flex;gap:10px;margin-top:16px}
+.lnav button{flex:1;padding:14px;font-size:16px;font-weight:600;border:none;border-radius:12px;cursor:pointer}
+.prev{background:#334155;color:#e2e8f0}.next{background:#0ea5e9;color:#fff}
+.lnav button:disabled{opacity:.35}
+.dots{display:flex;justify-content:center;gap:6px;margin-top:12px}
+.dots i{width:8px;height:8px;border-radius:50%;background:#475569}.dots i.on{background:#38bdf8}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:#1e293b;border-top:1px solid #334155;padding:6px 4px calc(6px + env(safe-area-inset-bottom));justify-content:center}
+nav button{flex:1;max-width:120px;background:none;border:none;color:#94a3b8;font-size:10px;padding:6px 0;cursor:pointer;border-radius:10px}
+nav button .ic{display:block;font-size:20px}
+nav button.active{color:#38bdf8;background:#0f172a}
 </style>
 
 <div class="app">
-  <header>
-    <h1 id="title-main">🏗️ ObraTech</h1>
-    <p class="sub" id="p-sub">Consulta diaria para instalaciones industriales: refrigeración y clima</p>
-  </header>
+<h1 id="t-main">🏗️ ObraTech</h1>
+<p class="sub" id="t-sub">Jefe de obra en centrales: grupo electrógeno, cuadros, SSAA, clima y salas OBA</p>
 
-  <section class="panel active" id="tab-sch">
-    <div class="card">
-      <h2 id="h-sch">Esquemas interactivos</h2>
-      <p class="hint" id="p-sch">Elige un esquema y toca los números azules para ver qué hace cada elemento.</p>
-      <div class="chips" id="sch-chips" style="margin-top:10px"></div>
-      <div id="sch-view" style="margin-top:10px"></div>
-      <div class="info" id="sch-info">Toca un número del esquema.</div>
-      <div class="plist" id="sch-list"></div>
-    </div>
-    <div class="card">
-      <h3 id="h-key">Valores clave del esquema</h3>
-      <div id="sch-notes" style="font-size:13px;line-height:1.6"></div>
-      <div class="warn" id="p-warn1">⚠️ Valores orientativos de buena práctica. Manda siempre el manual del fabricante del motor, del equipo y del proyecto.</div>
-    </div>
-  </section>
+<!-- ============ ESQUEMAS ============ -->
+<section class="panel active" id="tab-sch">
+ <div class="card">
+  <h2 id="h-sch">Esquemas ilustrados</h2>
+  <p class="hint" id="p-sch">Elige un sistema. Debajo de la imagen tienes cada elemento explicado, en el mismo orden en que lo verás.</p>
+  <div class="chips" id="sch-chips" style="margin:10px 0"></div>
 
-  <section class="panel" id="tab-calc">
-    <div class="card">
-      <h2 id="h-gly">Glicol, volumen y vaso de expansión</h2>
-      <p class="hint" id="p-gly">Circuito grupo electrógeno + aerorrefrigerador.</p>
-      <div class="row">
-        <div><label for="g-motor">Motor (L)</label><input id="g-motor" type="number" inputmode="decimal" placeholder="Ej. 120"></div>
-        <div><label for="g-dc">Aerorrefrigerador (L)</label><input id="g-dc" type="number" inputmode="decimal" placeholder="Ej. 90"></div>
-      </div>
-      <div class="row">
-        <div><label for="g-dn">Diámetro tubería</label>
-          <select id="g-dn"><option value="0.58">DN25</option><option value="1.0">DN32</option><option value="1.3">DN40</option><option value="2.2" selected>DN50</option><option value="3.7">DN65</option><option value="5.3">DN80</option><option value="9.0">DN100</option></select></div>
-        <div><label for="g-len">Longitud total (m)</label><input id="g-len" type="number" inputmode="decimal" placeholder="Ej. 60"></div>
-      </div>
-      <div class="row">
-        <div><label for="g-pct">% glicol</label>
-          <select id="g-pct"><option value="30">30 %</option><option value="35">35 %</option><option value="40">40 %</option><option value="50">50 %</option></select></div>
-        <div><label for="g-h">Altura vaso→punto alto (m)</label><input id="g-h" type="number" inputmode="decimal" placeholder="Ej. 8"></div>
-      </div>
-      <label for="g-sv">Tarado válvula de seguridad (bar)</label>
-      <input id="g-sv" type="number" inputmode="decimal" value="3">
-      <button class="calc" id="g-btn">Calcular</button>
-      <div class="result" id="g-out"></div>
-    </div>
+  <div class="sch active" id="sch-gen">
+   <img class="pic" alt="Refrigeración del grupo electrógeno" data-src="Realistic 3D technical cutaway of a diesel generator set cooling circuit: engine block on the left with semi-transparent water jackets, thermostat housing, centrifugal pump with Y strainer and butterfly valves on insulated steel pipes, pressure gauges, expansion vessel and safety relief valve above, large rooftop dry cooler with fans on the right, red arrows for hot coolant going to the cooler and blue arrows for cold coolant returning, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Motor', 'Termostato', 'Bomba', 'Filtro Y', 'Válvula de corte', 'Manómetro', 'Vaso de expansión', 'Purgador', 'Aerorrefrigerador', 'Ida caliente', 'Retorno frío', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+   <div id="el-gen"></div>
+  </div>
+  <div class="sch" id="sch-split">
+   <img class="pic" alt="Ciclo del split" data-src="Realistic 3D technical cutaway of a split air conditioner refrigeration cycle: outdoor unit on the right with scroll compressor, finned condenser coil and fan, indoor wall unit on the left with evaporator coil, drain pan and electronic expansion valve, insulated copper suction line and thin liquid line connecting both, red arrows for hot high pressure gas, orange for liquid, blue for cold low pressure gas, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Compresor', 'Condensador', 'Válvula de expansión', 'Evaporador', 'Línea de líquido', 'Línea de aspiración', 'Desagüe', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+   <div id="el-split"></div>
+  </div>
+  <div class="sch" id="sch-dx">
+   <img class="pic" alt="Clima de precisión DX 35 kW" data-src="Realistic 3D technical cutaway of a telecom equipment room with a 35 kW precision cooling unit on the left showing two scroll compressors, evaporator coil, EC fans, filters and humidifier, rows of server racks with cold aisle and hot aisle, raised floor delivering cold air, and on the right a rooftop remote condenser with two fans connected by two insulated copper pipes with an oil trap loop, blue arrows for cold air, red arrows for hot air and hot gas, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Equipo DX', 'Compresor scroll', 'Ventilador EC', 'Evaporador', 'Racks', 'Pasillo frío', 'Pasillo caliente', 'Gas caliente', 'Líquido', 'Trampa de aceite', 'Condensador remoto', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+   <div id="el-dx"></div>
+  </div>
+  <div class="sch" id="sch-ats">
+   <img class="pic" alt="Cuadro de conmutación ATS" data-src="Realistic 3D technical illustration of a low voltage transfer switchboard: utility transformer at the top left, 600 kVA diesel generator at the top right, two large motorized circuit breakers side by side with a mechanical interlock between them, an automatic transfer controller with a small screen above, copper busbars below feeding four outgoing breakers to UPS, rectifier cabinet, precision cooling unit and auxiliary services panel, glowing amber lines for power and violet dashed lines for control signals, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Red', 'Grupo', 'Interruptor red', 'Interruptor grupo', 'Enclavamiento', 'Controlador ATS', 'Barras', 'SAI', 'Rectificadores', 'Clima', 'SSAA', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+   <div id="el-ats"></div>
+  </div>
+  <div class="sch" id="sch-ssaa">
+   <img class="pic" alt="SSAA del grupo electrógeno" data-src="Realistic 3D technical illustration of a diesel generator room showing the auxiliary services: electric jacket water heater on the engine, battery charger on the wall connected to two 12V batteries in series, auxiliary services electrical panel, motorized intake and discharge louvers, fuel day tank with float level switch and transfer pump, dry cooler fans outside, shielded control cables going to a transfer switch and a monitoring system, amber lines for power and violet dashed lines for signals, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Cuadro SSAA', 'Calentador', 'Cargador', 'Baterías', 'Compuertas', 'Depósito diario', 'Bomba trasiego', 'Ventiladores aero', 'Controlador', 'Señales ATS', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+   <div id="el-ssaa"></div>
+  </div>
+  <div class="warn" id="p-warn1">⚠️ Las imágenes son ilustraciones generadas por IA para entender el sistema. Para ejecutar la obra mandan los planos del proyecto, el manual del fabricante y la normativa interna de Telefónica.</div>
+ </div>
+</section>
 
-    <div class="card">
-      <h2 id="h-flow">Caudal de glicol del circuito</h2>
-      <p class="hint" id="p-flow">Calor a disipar (ficha del motor) y salto de temperatura.</p>
-      <div class="row">
-        <div><label for="f-kw">Calor a disipar (kW)</label><input id="f-kw" type="number" inputmode="decimal" placeholder="Ej. 250"></div>
-        <div><label for="f-dt">ΔT (K)</label><input id="f-dt" type="number" inputmode="decimal" value="8"></div>
-      </div>
-      <label for="f-pct">Mezcla</label>
-      <select id="f-pct"><option value="0">Agua (0 %)</option><option value="30" selected>Glicol 30 %</option><option value="40">Glicol 40 %</option><option value="50">Glicol 50 %</option></select>
-      <button class="calc" id="f-btn">Calcular caudal</button>
-      <div class="result" id="f-out"></div>
-    </div>
+<!-- ============ APRENDE ============ -->
+<section class="panel" id="tab-lea">
+ <div class="view active" id="v-home">
+  <div class="card">
+   <h2 id="h-lea">🎓 Aprende cómo funciona</h2>
+   <p class="hint" id="p-lea">Lecciones cortas con ilustraciones. Avanza tarjeta a tarjeta.</p>
+   <button class="lcard" data-open="1"><span class="ic">🔥</span><div><b>Refrigeración del grupo electrógeno</b><span class="d">Del motor caliente al aerorrefrigerador y vuelta</span></div></button>
+   <button class="lcard" data-open="2"><span class="ic">❄️</span><div><b>Cómo funciona un split</b><span class="d">El ciclo frigorífico explicado en imágenes</span></div></button>
+   <button class="lcard" data-open="3"><span class="ic">🧊</span><div><b>Clima de precisión DX 35 kW (sala OBA)</b><span class="d">Aire, refrigerante, condensador remoto y redundancia</span></div></button>
+   <button class="lcard" data-open="4"><span class="ic">🔀</span><div><b>Cuadro de conmutación (ATS)</b><span class="d">Desde que cae la red hasta que vuelve</span></div></button>
+   <button class="lcard" data-open="5"><span class="ic">🔌</span><div><b>SSAA del grupo electrógeno</b><span class="d">Lo que mantiene el grupo listo para arrancar</span></div></button>
+  </div>
+ </div>
 
-    <div class="card">
-      <h2 id="h-air">Caudal de aire en sala técnica</h2>
-      <p class="hint" id="p-air">Q = P / (0,34 · ΔT)</p>
-      <div class="row">
-        <div><label for="a-kw">Carga térmica (kW)</label><input id="a-kw" type="number" inputmode="decimal" value="35"></div>
-        <div><label for="a-dt">ΔT aire (K)</label><input id="a-dt" type="number" inputmode="decimal" value="10"></div>
-      </div>
-      <button class="calc" id="a-btn">Calcular aire</button>
-      <div class="result" id="a-out"></div>
-    </div>
+ <div class="view" id="v-lesson">
+  <div class="card">
+   <div class="top"><button class="back" id="btn-back">← Lecciones</button><span id="lt-title" style="font-size:15px;font-weight:600"></span></div>
+   <div class="bar"><i id="bar-fill"></i></div>
 
-    <div class="card">
-      <h2 id="h-pt">Presión según temperatura (refrigerante)</h2>
-      <label for="pt-gas">Refrigerante</label>
-      <select id="pt-gas"><option value="R410A">R410A</option><option value="R32">R32</option><option value="R134a">R134a</option></select>
-      <div id="pt-out"></div>
-      <div class="warn" id="p-warn2">⚠️ Presión manométrica (bar g), aproximada. Usa el manómetro o la app del fabricante del gas. Solo personal con certificado F-Gas puede manipular refrigerante.</div>
+   <div class="lesson" data-lesson="1" data-name="🔥 Refrigeración del grupo">
+    <div class="step">
+     <img class="pic" alt="El motor genera calor" data-src="Realistic 3D technical cutaway of a large diesel generator engine with glowing orange-red heat inside the water jackets, red arrows showing hot coolant leaving the engine through a pipe and blue arrows showing cooler coolant returning, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Motor', 'Ida caliente', 'Retorno frío', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a1-1h">1. El motor genera calor</h3>
+     <p id="a1-1p">Un motor diésel solo convierte una parte del combustible en energía. El resto es calor que hay que sacar o el motor se estropea. Por eso circula agua con glicol por las camisas del motor.</p>
+     <div class="tip">💡 El líquido suele salir del motor a unos 85–95 °C.</div>
     </div>
-  </section>
+    <div class="step">
+     <img class="pic" alt="Bomba, termostato y válvulas" data-src="Realistic 3D technical cutaway of a centrifugal circulation pump with a thermostat housing, a Y strainer, butterfly shut-off valves and pressure gauges on insulated steel pipes, semi-transparent blue and red fluid flow with arrows, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Bomba', 'Termostato', 'Filtro Y', 'Válvula de corte', 'Manómetro', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a1-2h">2. La bomba mueve y el termostato decide</h3>
+     <p id="a1-2p">La bomba empuja el líquido. Con el motor frío, el termostato lo hace recircular por dentro para calentarse rápido. Al llegar a temperatura, abre el paso hacia el aerorrefrigerador. El filtro Y retiene la suciedad y las válvulas permiten aislar equipos.</p>
+     <div class="tip">💡 En servicio, las válvulas de corte van siempre abiertas.</div>
+    </div>
+    <div class="step">
+     <img class="pic" alt="Aerorrefrigerador, vaso y purgador" data-src="Realistic 3D technical cutaway of a rooftop dry cooler with large fans and a finned coil heat exchanger, hot red coolant entering at the top and cooled blue coolant leaving at the bottom, ambient air arrows crossing the coil, next to it an expansion vessel with a pressure gauge, an automatic air vent and a safety relief valve with discharge pipe, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Aerorrefrigerador', 'Ventiladores', 'Vaso de expansión', 'Purgador', 'Válvula de seguridad', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a1-3h">3. El calor sale al aire</h3>
+     <p id="a1-3p">El líquido caliente entra por arriba en la batería de aletas. Los ventiladores empujan aire exterior a través y el líquido se enfría. Vuelve al motor unos 5–10 grados más frío. El vaso absorbe la dilatación, el purgador saca el aire y la válvula de seguridad protege el circuito.</p>
+     <div class="tip">💡 Con aletas sucias o aire que recircula, el grupo se calienta aunque todo parezca funcionar.</div>
+    </div>
+   </div>
 
-  <section class="panel" id="tab-ai">
-    <div class="card">
-      <h2 id="h-ai">🤖 Asistente de obra</h2>
-      <p class="hint" id="p-ai">Pregunta en lenguaje normal. Responde con la base de conocimiento incluida en la app.</p>
-      <div class="chips" id="ai-chips" style="margin-top:10px"></div>
-      <div class="chat" id="chat"></div>
-      <div class="ask">
-        <input id="ai-q" type="text" placeholder="Ej. ¿Cuánto glicol pongo?" enterkeyhint="send">
-        <button id="ai-btn">➤</button>
-      </div>
+   <div class="lesson" data-lesson="2" data-name="❄️ Split">
+    <div class="step">
+     <img class="pic" alt="Visión general del split" data-src="Realistic 3D technical cutaway of a split air conditioner: indoor wall unit and outdoor unit connected through a wall by two insulated copper pipes, translucent view of refrigerant flowing in a closed loop, red arrows for hot gas, blue arrows for cold refrigerant, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Unidad interior', 'Unidad exterior', 'Tuberías de cobre', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a2-1h">1. Un circuito cerrado que mueve calor</h3>
+     <p id="a2-1p">Un split no fabrica frío: traslada el calor de dentro a fuera. El refrigerante circula en un circuito cerrado entre las dos unidades, pasando de líquido a gas y de gas a líquido.</p>
     </div>
-  </section>
+    <div class="step">
+     <img class="pic" alt="Unidad exterior" data-src="Realistic 3D technical cutaway of an air conditioner outdoor unit showing a scroll compressor, a finned condenser coil and a fan, hot red refrigerant gas entering the coil and warm air blowing out, copper pipes, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Compresor', 'Condensador', 'Ventilador', 'Gas caliente', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a2-2h">2. Compresor y condensador (fuera)</h3>
+     <p id="a2-2p">El compresor aprieta el gas y lo calienta mucho. En el condensador, el ventilador lo enfría con aire exterior y el gas pasa a líquido, soltando el calor fuera del edificio.</p>
+     <div class="tip">💡 Condensador sucio significa presión alta y el equipo salta por protección.</div>
+    </div>
+    <div class="step">
+     <img class="pic" alt="Unidad interior" data-src="Realistic 3D technical cutaway of an indoor air conditioner unit showing an evaporator coil with condensation droplets, an electronic expansion valve at the coil inlet, a drain pan with a drain pipe, cool blue air flowing into a room, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Válvula de expansión', 'Evaporador', 'Desagüe', 'Aire frío', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a2-3h">3. Expansión y evaporador (dentro)</h3>
+     <p id="a2-3p">El líquido pasa por la válvula de expansión y baja de presión, enfriándose mucho. En el evaporador absorbe el calor del aire de la sala y vuelve a ser gas. El agua que condensa sale por el desagüe, que debe llevar pendiente.</p>
+     <div class="tip">💡 Antes de cargar gas se hace prueba con nitrógeno y vacío por debajo de 500 micras.</div>
+    </div>
+   </div>
 
-  <section class="panel" id="tab-chk">
-    <div class="card">
-      <h2 id="h-chk">Checklists de puesta en marcha</h2>
-      <div class="chips" id="chk-chips" style="margin-top:10px"></div>
-      <div id="chk-list"></div>
-      <button class="calc" id="chk-reset">Reiniciar lista</button>
+   <div class="lesson" data-lesson="3" data-name="🧊 DX 35 kW / OBA">
+    <div class="step">
+     <img class="pic" alt="Flujo de aire en la sala" data-src="Realistic 3D view of a telecom equipment room with two rows of server racks forming a cold aisle and a hot aisle, a large precision cooling unit at the end of the row, blue arrows for cold air coming through the raised floor into the rack fronts, red arrows for hot air returning above the racks to the unit, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Equipo de clima', 'Pasillo frío', 'Pasillo caliente', 'Racks', 'Suelo técnico', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a3-1h">1. El aire recorre la sala</h3>
+     <p id="a3-1p">El equipo de precisión impulsa aire frío por el suelo técnico hacia el frente de los racks. Los equipos lo calientan y lo expulsan por detrás. Ese aire vuelve al equipo y se enfría otra vez.</p>
+     <div class="tip">💡 Los paneles ciegos en los huecos de los racks evitan que se mezcle el aire frío con el caliente.</div>
     </div>
-  </section>
+    <div class="step">
+     <img class="pic" alt="Interior del equipo DX" data-src="Realistic 3D technical cutaway of a 35 kW precision cooling unit with two scroll compressors, evaporator coil, EC fans, electronic expansion valve, humidifier and filters, red hot return air entering at the top and blue cold air leaving at the bottom, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Filtros', 'Evaporador', 'Ventilador EC', 'Compresor scroll', 'Humidificador', 'Válvula de expansión', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a3-2h">2. Por dentro del equipo DX</h3>
+     <p id="a3-2p">El aire caliente atraviesa los filtros y el evaporador, donde cede su calor al refrigerante. Los ventiladores EC lo devuelven frío. Dos compresores scroll comparten la carga y el humidificador mantiene la humedad.</p>
+    </div>
+    <div class="step">
+     <img class="pic" alt="Condensador remoto y redundancia" data-src="Realistic 3D view of a rooftop remote air-cooled condenser with two large fans connected by two insulated copper pipes running down the building wall, one hot gas line and one liquid line, an oil trap loop on the vertical riser, and inside a telecom room three precision cooling units, two running with green indicators and one on standby, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Condensador remoto', 'Gas caliente', 'Líquido', 'Trampa de aceite', 'En marcha', 'Reserva', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a3-3h">3. El calor sale por el condensador remoto</h3>
+     <p id="a3-3p">Dos tuberías unen el equipo con el condensador de cubierta: sube gas caliente y vuelve líquido. En los tramos verticales hay trampas de aceite. Con N+1 hay una unidad de más: si una falla, otra toma el relevo y las alarmas llegan a telegestión.</p>
+     <div class="tip">💡 El fabricante fija diámetros y longitudes máximas. Prueba la conmutación entre unidades antes de entregar.</div>
+    </div>
+   </div>
+
+   <div class="lesson" data-lesson="4" data-name="🔀 Conmutación ATS">
+    <div class="step">
+     <img class="pic" alt="Funcionamiento normal con red" data-src="Realistic 3D technical illustration of a low voltage transfer switchboard with two large motorized circuit breakers side by side, the utility grid breaker closed with a green indicator, the generator breaker open, glowing amber line carrying power from the grid through busbars to the loads, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Red', 'Interruptor red', 'Interruptor grupo', 'Barras', 'Cargas', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a4-1h">1. Normal: manda la red</h3>
+     <p id="a4-1p">El cuadro tiene dos interruptores motorizados: uno para la red y otro para el grupo. Con red buena, el de red está cerrado y alimenta toda la instalación. El del grupo permanece abierto.</p>
+     <div class="tip">💡 Nunca pueden estar cerrados a la vez. El enclavamiento lo impide.</div>
+    </div>
+    <div class="step">
+     <img class="pic" alt="Fallo de red y arranque del grupo" data-src="Realistic 3D technical illustration of a transfer controller screen glowing red detecting a grid failure, the grid breaker opening, and a large diesel generator set starting in the background with exhaust haze and a digital controller showing ready status, violet dashed control line from controller to generator, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Controlador ATS', 'Fallo de red', 'Orden de arranque', 'Grupo', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a4-2h">2. Falla la red y arranca el grupo</h3>
+     <p id="a4-2p">El controlador vigila tensión y frecuencia. Si se salen de límites, espera unos segundos para no reaccionar a un microcorte. Si persiste, da la orden de arrancar el grupo, que alcanza 400 V y 50 Hz estables en pocos segundos.</p>
+     <div class="tip">💡 Ese corto instante sin tensión es la razón de ser del SAI y las baterías.</div>
+    </div>
+    <div class="step">
+     <img class="pic" alt="Transferencia y retorno a red" data-src="Realistic 3D technical illustration of a transfer switchboard where the generator breaker is closed supplying amber power to UPS, rectifier and cooling loads, then the grid breaker closing again with green restored-grid indicators, the generator idling to cool down in the background with light exhaust haze, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Grupo en carga', 'Vuelve la red', 'Enfriamiento', 'SAI', 'Rectificadores', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a4-3h">3. Toma la carga y vuelve la red</h3>
+     <p id="a4-3p">Con el grupo estable, se cierra su interruptor y toma la carga. Al volver la red, el controlador espera varios minutos para asegurar que es estable, transfiere y deja el grupo en vacío unos minutos para enfriarse antes de pararlo.</p>
+     <div class="tip">💡 La mejor prueba es un corte real de red antes de la entrega.</div>
+    </div>
+   </div>
+
+   <div class="lesson" data-lesson="5" data-name="🔌 SSAA del grupo">
+    <div class="step">
+     <img class="pic" alt="Calentador y baterías" data-src="Realistic 3D technical cutaway of a diesel generator engine with an electric jacket water heater, a battery charger mounted on the wall connected to two 12V batteries in series, a small auxiliary electrical panel with amber indicators feeding them, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Calentador', 'Cargador', 'Baterías', 'Cuadro SSAA', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a5-1h">1. Mantener el grupo listo</h3>
+     <p id="a5-1p">Un grupo de emergencia debe arrancar a la primera. Por eso, parado, un calentador mantiene el motor templado y un cargador mantiene llenas las baterías de arranque.</p>
+     <div class="tip">💡 Si estos servicios se quedan sin tensión, el grupo puede fallar justo cuando se necesita.</div>
+    </div>
+    <div class="step">
+     <img class="pic" alt="Aire, refrigeración y combustible" data-src="Realistic 3D technical cutaway of a generator room with motorized louvers opening on the intake and discharge walls, blue and red air flow arrows, a fuel day tank with float level switch and transfer pump, and a dry cooler with fans running outside, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Compuertas', 'Depósito diario', 'Bomba trasiego', 'Flotador', 'Ventiladores aero', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a5-2h">2. Aire, refrigeración y combustible</h3>
+     <p id="a5-2p">Al arrancar el grupo, las compuertas de la sala se abren y los ventiladores del aerorrefrigerador entran en servicio. Una bomba rellena el depósito diario cuando los flotadores indican nivel bajo.</p>
+     <div class="tip">💡 Todo cuelga del cuadro SSAA, alimentado desde una barra respaldada por el grupo.</div>
+    </div>
+    <div class="step">
+     <img class="pic" alt="Señales hacia ATS y BMS" data-src="Realistic 3D technical illustration of a generator control cabinet with a digital controller screen, neatly labeled shielded control cables running separately from power cables to a transfer switch and a building monitoring system screen, green status lights and one amber alarm light, off-white background, soft studio lighting, small white label tags with short Spanish captions in black serif font: 'Controlador', 'Señales ATS', 'Telegestión', 'Alarma', vertical 3:4 composition, in a technical photorealistic cutaway render style">
+     <h3 id="a5-3h">3. Las señales cuentan qué pasa</h3>
+     <p id="a5-3p">El grupo habla con el cuadro de conmutación por contactos: orden de arranque, en marcha y listo para cargar. También envía alarmas a la telegestión. Estos cables van apantallados y separados de los de potencia.</p>
+     <div class="tip">💡 Simula cada alarma en la puesta en marcha y confirma que llega al BMS.</div>
+    </div>
+   </div>
+
+   <div class="dots" id="dots"></div>
+   <div class="lnav"><button class="prev" id="btn-prev">← Anterior</button><button class="next" id="btn-next">Siguiente →</button></div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ GUÍAS ============ -->
+<section class="panel" id="tab-gui">
+ <div class="card">
+  <h2 id="h-gui">Guías de instalación</h2>
+  <p class="hint" id="p-gui">Cómo se instala y se pone en marcha cada parte.</p>
+  <div id="gui-list"></div>
+  <div class="warn" id="p-warn3">⚠️ Trabajos eléctricos solo por personal cualificado y autorizado, con las 5 reglas de oro.</div>
+ </div>
+</section>
+
+<!-- ============ CÁLCULO ============ -->
+<section class="panel" id="tab-calc">
+ <div class="card">
+  <h2 id="h-calc">Calculadoras</h2>
+  <div class="chips" id="calc-chips" style="margin-top:8px">
+   <button class="chip active" data-g="el">⚡ Eléctrico</button>
+   <button class="chip" data-g="hy">💧 Hidráulica y clima</button>
+  </div>
+ </div>
+ <div class="grp active" id="g-el"></div>
+ <div class="grp" id="g-hy"></div>
+ <div class="warn" id="p-warn4">⚠️ Cálculo previo de obra. El dimensionado final lo firma el proyectista según REBT, UNE 20460 y el proyecto.</div>
+</section>
+
+<!-- ============ ASISTENTE ============ -->
+<section class="panel" id="tab-ai">
+ <div class="card">
+  <h2 id="h-ai">🤖 Asistente de obra <span class="badge off" id="ai-badge">Modo local</span></h2>
+  <p class="hint" id="p-ai">Con una clave de API conectas una IA real (necesita internet). Sin clave responde con la base incluida.</p>
+  <details id="ai-set">
+   <summary>⚙️ Conectar IA real</summary>
+   <div class="body">
+    <label for="ai-prov">Proveedor</label>
+    <select id="ai-prov"><option value="anthropic">Anthropic (Claude)</option><option value="openai">OpenAI (ChatGPT)</option></select>
+    <label for="ai-key">Clave de API</label>
+    <input id="ai-key" type="password" autocomplete="off" placeholder="sk-...">
+    <label for="ai-model">Modelo</label>
+    <input id="ai-model" type="text" placeholder="claude-sonnet-4-5 / gpt-4o-mini">
+    <button class="calc" id="ai-save">Guardar</button>
+    <button class="calc" id="ai-clear" style="background:#475569">Borrar clave</button>
+    <div class="warn" id="p-warn5">La clave se guarda solo en este navegador y viaja directa al proveedor. Pon un límite de gasto en su panel.</div>
+   </div>
+  </details>
+  <div class="chips" id="ai-chips" style="margin-top:10px"></div>
+  <div class="chat" id="chat"></div>
+  <div class="ask"><input id="ai-q" type="text" placeholder="Ej. ¿Cómo conecto el ATS al GE?" enterkeyhint="send"><button id="ai-btn">➤</button></div>
+ </div>
+</section>
+
+<!-- ============ CHECK ============ -->
+<section class="panel" id="tab-chk">
+ <div class="card">
+  <h2 id="h-chk">Checklists de obra</h2>
+  <p class="hint" id="p-chk">Se guardan en este navegador.</p>
+  <div class="chips" id="chk-chips" style="margin-top:10px"></div>
+  <div id="chk-list"></div>
+  <button class="calc" id="chk-reset">Reiniciar lista</button>
+ </div>
+</section>
 </div>
 
-<nav>
-  <button class="active" data-tab="tab-sch"><span class="ic">📐</span>Esquemas</button>
-  <button data-tab="tab-calc"><span class="ic">🧮</span>Cálculo</button>
-  <button data-tab="tab-ai"><span class="ic">🤖</span>Asistente</button>
-  <button data-tab="tab-chk"><span class="ic">✅</span>Check</button>
+<nav id="nav">
+ <button class="active" data-tab="tab-sch"><span class="ic">📐</span>Esquemas</button>
+ <button data-tab="tab-lea"><span class="ic">🎓</span>Aprende</button>
+ <button data-tab="tab-gui"><span class="ic">📘</span>Guías</button>
+ <button data-tab="tab-calc"><span class="ic">🧮</span>Cálculo</button>
+ <button data-tab="tab-ai"><span class="ic">🤖</span>IA</button>
+ <button data-tab="tab-chk"><span class="ic">✅</span>Check</button>
 </nav>
 
 <script>
 (function(){
-  var $ = function(id){return document.getElementById(id);};
-  var fmt = function(n,d){ if(!isFinite(n)) return "—"; return (Math.round(n*Math.pow(10,d||1))/Math.pow(10,d||1)).toString(); };
+var $=function(i){return document.getElementById(i);};
+var n=0;
+function mk(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!==undefined)e.innerHTML=html;if(/^(h[1-4]|p)$/.test(tag))e.id="g"+(++n);return e;}
+function fmt(x,d){if(!isFinite(x))return "—";var f=Math.pow(10,d===undefined?1:d);return (Math.round(x*f)/f).toString();}
+function norm(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9+\s]/g," ");}
 
-  /* ---------- Tabs ---------- */
-  var navBtns = document.querySelectorAll("nav button");
-  navBtns.forEach(function(b){
-    b.addEventListener("click", function(){
-      navBtns.forEach(function(x){x.classList.remove("active");});
-      document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active");});
-      b.classList.add("active");
-      $(b.getAttribute("data-tab")).classList.add("active");
-      window.scrollTo(0,0);
-    });
-  });
+/* ---------- Pestañas ---------- */
+var nb=document.querySelectorAll("#nav button");
+nb.forEach(function(b){b.addEventListener("click",function(){
+ nb.forEach(function(x){x.classList.remove("active");});
+ document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active");});
+ b.classList.add("active");$(b.getAttribute("data-tab")).classList.add("active");window.scrollTo(0,0);});});
 
-  /* ---------- SVG helpers ---------- */
-  var DEFS = '<defs><g id="vlv"><path d="M-7,-5L7,5V-5L-7,5Z" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5"/></g>'+
-    '<g id="gau"><circle r="6" fill="#0f172a" stroke="#22c55e" stroke-width="1.5"/><path d="M0,0L3,-3" stroke="#22c55e" stroke-width="1.2"/></g>'+
-    '<marker id="ar" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0L6,3L0,6Z" fill="#94a3b8"/></marker></defs>';
-  function v(x,y){return '<use href="#vlv" x="'+x+'" y="'+y+'"/>';}
-  function g(x,y){return '<use href="#gau" x="'+x+'" y="'+y+'"/>';}
-  function t(x,y,s,c){return '<text class="'+(c||'lb')+'" x="'+x+'" y="'+y+'">'+s+'</text>';}
-  function line(d,col,w,arrow){return '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="'+(w||2.5)+'"'+(arrow?' marker-end="url(#ar)"':'')+'/>';}
-  var zig = function(x,y,n,dir){ var s='M'+x+','+y; for(var i=0;i<n;i++){ s+=' l'+(dir*10)+','+(i%2?12:-12);} return s; };
+/* ---------- Esquemas: elementos ---------- */
+var SC=[
+{id:"gen",t:"🔥 Grupo + aero",el:[
+["Motor (circuito de camisas)","Salida de agua+glicol a <b>80–95 °C</b>, ΔT de <b>5–10 K</b> entre ida y retorno. Alarma por alta temperatura hacia 95–100 °C y paro hacia 100–105 °C; confirma en el manual. Algunos motores llevan un 2º circuito de baja temperatura (postenfriador, 40–55 °C)."],
+["Termostato","En frío hace recircular el líquido por el motor. A unos 80–85 °C abre hacia el aerorrefrigerador. Si se atasca, el motor se calienta con el aero frío o no alcanza temperatura."],
+["Bomba de circulación","Comprueba <b>sentido de giro</b>, que no trabaje en seco y que haya presión positiva en la aspiración. La diferencia de presión antes y después sirve para contrastar el caudal con su curva. Su motor cuelga del cuadro SSAA."],
+["Filtro Y y retención","Filtro Y con malla de 0,5–1 mm en la aspiración de la bomba: <b>límpialo</b> tras las primeras horas. La retención tras la bomba evita el flujo inverso."],
+["Válvulas de corte","Bola o mariposa PN16 con juntas EPDM aptas para glicol. En entrada y salida de motor, bomba y aero. En servicio, todas <b>abiertas</b> y señalizadas; nunca arrancar con la salida cerrada."],
+["Manómetros y termómetros","Escala 0–6 o 0–10 bar, con glicerina y llave de aislamiento. Uno en impulsión y otro en aspiración de la bomba. Llenado en frío 1–1,5 bar · trabajo 1,5–2,5 bar · seguridad ≈ 3 bar (según fabricante)."],
+["Aerorrefrigerador (dry cooler)","Entra el líquido caliente por <b>arriba</b> y sale por <b>abajo</b>. Ventiladores por escalones según temperatura. Espacio libre, sin recirculación, nivelado, con compensadores de vibración y purgador en el punto alto. Se dimensiona con los kW de rechazo de calor de la ficha del motor."],
+["Vaso de expansión","Absorbe la dilatación (3–5 %). Precarga ≈ <b>H/10 + 0,3 bar</b> (H = altura en m al punto más alto), medida con el vaso aislado y sin presión de agua. Se conecta cerca de la aspiración de la bomba."],
+["Purgador de aire","Automático en el punto alto, con válvula de corte. El aire provoca cavitación, ruido y mala refrigeración. Purga durante el llenado y repite a las 24 h."],
+["Válvula de seguridad","Tarado habitual ≈ 3 bar, pero comprueba el límite del motor. Descarga canalizada a un punto visible y seguro. Nunca la taponar."],
+["Glicol: porcentaje y litros","Protección aprox.: <b>30 % → −13 °C</b> · <b>40 % → −23 °C</b> · <b>50 % → −37 °C</b>. Elige según la temperatura mínima con ~5 K de margen y no pases del 50 %. Llena con mezcla ya preparada y agua desmineralizada; no mezcles marcas."]
+],notes:"<b>Resumen:</b> llenado 1–1,5 bar · trabajo 1,5–2,5 bar · seguridad ≈ 3 bar · ida 85–95 °C · ΔT 5–10 K · glicol 30–50 % · precarga H/10 + 0,3 bar · purgar y limpiar filtro a las 24 h."},
+{id:"split",t:"❄️ Split",el:[
+["Compresor","Comprime el gas y sube presión y temperatura. Comprueba tensión, giro (scroll) e intensidad frente a placa. Nunca arrancar con las llaves de servicio cerradas."],
+["Condensador (exterior)","El gas caliente cede calor al aire y pasa a líquido. Condensación con R410A a 40–50 °C (≈ 23–30 bar g). Si la alta es excesiva: suciedad, ventilador parado o exceso de gas."],
+["Válvula de expansión","Baja la presión del líquido. EEV o capilar en split; TXV en equipos mayores. Regula el <b>sobrecalentamiento</b> (5–8 K) para que al compresor solo llegue gas."],
+["Evaporador (interior)","El refrigerante se evapora y absorbe calor del aire. Con R410A a 5–10 °C (≈ 8–10 bar g). Filtros limpios y ventilador libre."],
+["Línea de líquido","Tubo fino, sale subenfriado (4–8 K). En equipos mayores lleva filtro deshidratador y visor. Burbujas en el visor suelen indicar falta de gas."],
+["Línea de aspiración","Tubo grueso, <b>siempre aislado</b>, con pendiente hacia el compresor y trampas de aceite en ascendentes largas (≈ cada 6 m)."],
+["Desagüe de condensados","Pendiente mínima 1–2 %, con sifón si hay presión negativa. Prueba con agua antes de entregar."]
+],notes:"<b>Resumen (R410A):</b> baja 8–10 bar g · alta 23–30 bar g · sobrecalentamiento 5–8 K · subenfriamiento 4–8 K · vacío 500 micras · soldadura con nitrógeno · carga solo con certificado F-Gas (RD 552/2019)."},
+{id:"dx",t:"🧊 DX 35 kW / OBA",el:[
+["Equipo de precisión DX 35 kW","Tipo Tecnair / Stulz. Controla temperatura y humedad 24/7. Consigna típica <b>22–24 °C</b> y <b>40–60 % HR</b>. Alimentación 400 V III+N desde el cuadro de clima, con protección según ficha del equipo."],
+["Compresores scroll","Normalmente dos, que comparten la carga. Comprueba sentido de giro y escalona los arranques. Presostatos de alta y baja como protección."],
+["Ventiladores EC y evaporador","Los EC modulan el caudal. Aire para 35 kW con ΔT 10 K ≈ <b>10.300 m³/h</b>. Filtros limpios para evitar hielo en el evaporador."],
+["Racks y pasillos frío/caliente","Aire frío por el frente de los racks y caliente por detrás. Paneles ciegos y sellado de huecos. En sala OBA cada operador instala sus bastidores: reparte la carga térmica."],
+["Líneas de gas caliente y líquido","Hacia el condensador remoto. Gas a 60–100 °C: protege y aísla según proyecto. Diámetros dados por el fabricante. Soportes cada 1,5–2 m."],
+["Trampa de aceite","En ascendentes, una cada ~6–7 m de altura, con curva en U soldada, para devolver el aceite al compresor."],
+["Condensador remoto","Ventiladores EC y control de presión de condensación. Espacio libre, sin recirculación, anclajes antivibratorios. Revisa longitud equivalente y desnivel con las tablas del fabricante."],
+["Condensados, humidificador y alarmas","Desagüe con sifón y pendiente, bandeja y detección de fugas. Redundancia <b>N+1</b> con rotación. Alarmas al BMS por contacto seco, Modbus o SNMP."]
+],notes:"<b>Resumen:</b> aire ≈ 10.300 m³/h con ΔT 10 K · 22–24 °C · 40–60 % HR · trampa de aceite cada 6–7 m · vacío 500 micras · N+1 con rotación · confirma los requisitos propios de la sala OBA con el proyecto."},
+{id:"ats",t:"🔀 Conmutación ATS",el:[
+["Red / transformador","Suministro normal. Comprueba tensión, secuencia de fases y el régimen de neutro (TN-S, TT…)."],
+["Grupo 600 kVA","≈ 866 A a 400 V; potencia prime ≈ 480 kW a cos φ 0,8. Salida con varios cables unipolares por fase y tramo flexible a la caja de bornes."],
+["Interruptor de red (Q1)","Motorizado, típicamente 1000–1250 A. Poder de corte ≥ Icc de la red en ese punto. Protección L-S-I."],
+["Interruptor del grupo (Q2)","Ajusta a In del GE (1000 A normalizado para 866 A). Icc del alternador ≈ In / X''d ≈ 6–7 kA."],
+["Enclavamiento","<b>Q1 y Q2 nunca cerrados a la vez</b>. Doble seguridad: mecánico y eléctrico. Pruébalo y anota el resultado."],
+["Controlador ATS / AMF","Vigila tensión, frecuencia y secuencia. Caída ≈ 3–5 s · estabilización del GE ≈ 5–10 s · retorno ≈ 5–15 min · enfriamiento ≈ 3–5 min. Cable de control apantallado y separado de potencia."],
+["Barras / CGBT","Cobre ≥ 1000 A bajo IEC 61439. Par de apriete con llave dinamométrica y rotulado de fases. Con neutro a tierra en trafo y grupo, usa conmutación de <b>4 polos</b>."],
+["SAI y rectificadores -48 V","Cubren el hueco hasta que el grupo toma carga. Arranque escalonado (walk-in) y revisión de compatibilidad con el alternador por armónicos."],
+["Clima y SSAA","Escalona el arranque de compresores. El clima N+1 y los SSAA deben colgar de la barra respaldada por el grupo."]
+],notes:"<b>Resumen:</b> 600 kVA / 400 V → 866 A · interruptor típico 1000 A · enclavamiento mecánico + eléctrico · 4 polos si hay dos tierras de neutro · prueba real de corte de red antes de entregar."},
+{id:"ssaa",t:"🔌 SSAA del grupo",el:[
+["Cuadro SSAA","Alimentado desde una barra <b>respaldada por el grupo</b>. Guardamotores o curva D para motores, magnetotérmico para resistencias, diferenciales tipo A (B si hay variadores). Salidas rotuladas."],
+["Calentador de camisas","≈ 2–5 kW, mantiene el motor a 40–50 °C. <b>Debe tener tensión siempre</b> con el grupo parado. Con termostato propio y sin funcionar en seco."],
+["Cargador de baterías","Mantiene la flotación (≈ 27,2 V en 24 V plomo-ácido; mira la ficha). Alarma de fallo al controlador. Verifica polaridad y secciones."],
+["Baterías de arranque 24 V","Dos de 12 V en serie, cables cortos y gruesos, bornes limpios y apretados. En reposo ≈ 25,5–26,5 V. Desconectador accesible."],
+["Compuertas de la sala","Motorizadas, abren con la orden de arranque, antes de que suba la temperatura. Muelle de retorno que cierra si falta alimentación. Comprueba finales de carrera."],
+["Depósito diario y bomba de trasiego","Flotadores de nivel mínimo, máximo y alarma. Cubeto antiderrame y ventilación. Cumple la normativa de almacenamiento de combustible. Alarma de nivel bajo al BMS."],
+["Ventiladores del aero","Guardamotor o variador EC, escalones según temperatura del glicol, alarma si falla un escalón. Comprueba giro e intensidad frente a placa."],
+["Controlador del grupo","Mide aceite, temperatura, tensión, frecuencia y arranque fallido. Parada de emergencia en <b>cadena NC</b>. Parámetros según manual."],
+["Señales a ATS y BMS","Contactos libres de potencial: orden de arranque, GE en marcha, listo para cargar, alarma general, nivel bajo, emergencia. Cable apantallado y Modbus a la telegestión."]
+],notes:"<b>Resumen:</b> SSAA desde barra respaldada · calentador siempre con tensión con el GE parado · baterías 25,5–26,5 V · compuertas abren con la orden de arranque · emergencia en cadena NC · mide y anota las tierras."}
+];
+var chipsH="";SC.forEach(function(s,i){chipsH+='<button class="chip'+(i===0?' active':'')+'" data-k="'+s.id+'">'+s.t+'</button>';});
+$("sch-chips").innerHTML=chipsH;
+SC.forEach(function(s){
+ var box=$("el-"+s.id);
+ s.el.forEach(function(e,i){var d=document.createElement("details");var sm=document.createElement("summary");sm.textContent=(i+1)+". "+e[0];var b=mk("div","body",e[1]);d.appendChild(sm);d.appendChild(b);box.appendChild(d);});
+ box.appendChild(mk("div","notes",s.notes));
+});
+$("sch-chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;
+ document.querySelectorAll("#sch-chips .chip").forEach(function(c){c.classList.toggle("active",c===b);});
+ document.querySelectorAll(".sch").forEach(function(s){s.classList.toggle("active",s.id==="sch-"+b.getAttribute("data-k"));});});
 
-  /* ---------- Schemes ---------- */
-  var HOT="#ef4444", COLD="#38bdf8", LIQ="#f59e0b";
+/* ---------- Aprende ---------- */
+var cur=null,steps=[],idx=0;
+function showStep(){
+ steps.forEach(function(s,i){s.classList.toggle("active",i===idx);});
+ var d="";steps.forEach(function(s,i){d+='<i class="'+(i===idx?'on':'')+'"></i>';});
+ $("dots").innerHTML=d;$("bar-fill").style.width=((idx+1)/steps.length*100)+"%";
+ $("btn-prev").disabled=idx===0;$("btn-next").textContent=idx===steps.length-1?"✓ Terminar":"Siguiente →";window.scrollTo(0,0);
+}
+function openLesson(k){
+ document.querySelectorAll(".lesson").forEach(function(l){l.classList.remove("active");});
+ cur=document.querySelector('.lesson[data-lesson="'+k+'"]');cur.classList.add("active");
+ steps=[].slice.call(cur.querySelectorAll(".step"));idx=0;
+ $("lt-title").textContent=cur.getAttribute("data-name");
+ $("v-home").classList.remove("active");$("v-lesson").classList.add("active");showStep();
+}
+function homeL(){$("v-lesson").classList.remove("active");$("v-home").classList.add("active");window.scrollTo(0,0);}
+document.querySelectorAll("[data-open]").forEach(function(b){b.addEventListener("click",function(){openLesson(b.getAttribute("data-open"));});});
+$("btn-back").addEventListener("click",homeL);
+$("btn-prev").addEventListener("click",function(){if(idx>0){idx--;showStep();}});
+$("btn-next").addEventListener("click",function(){if(idx<steps.length-1){idx++;showStep();}else{homeL();}});
 
-  var svg1 = DEFS +
-    '<rect x="20" y="90" width="90" height="120" rx="8" fill="#334155" stroke="#64748b"/>'+t(42,148,'MOTOR')+t(34,160,'GRUPO ELECTR.','lb2')+
-    '<rect x="250" y="80" width="90" height="130" rx="8" fill="#1e3a5f" stroke="#38bdf8"/><circle cx="295" cy="125" r="16" fill="none" stroke="#94a3b8"/><circle cx="295" cy="172" r="16" fill="none" stroke="#94a3b8"/>'+
-    t(263,100,'AERORREFRIG.','lb2')+
-    '<rect x="165" y="30" width="30" height="45" rx="12" fill="#334155" stroke="#94a3b8"/>'+t(160,24,'Vaso exp.','lb2')+
-    line('M180,75 V110','#94a3b8',2)+
-    line('M110,110 H250',HOT,3,true)+ line('M250,190 H110',COLD,3,true)+
-    v(135,110)+v(225,110)+v(135,190)+v(225,190)+
-    '<circle cx="180" cy="190" r="13" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/><path d="M174,184 L188,190 L174,196Z" fill="#38bdf8"/>'+
-    '<rect x="198" y="184" width="14" height="12" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5"/>'+
-    line('M150,110 V96','#94a3b8',1.5)+g(150,90)+
-    line('M160,190 V204','#94a3b8',1.5)+g(160,210)+
-    line('M295,80 V68','#94a3b8',1.5)+'<circle cx="295" cy="64" r="4" fill="#22c55e"/>'+
-    line('M240,190 V212','#94a3b8',1.5)+v(240,218)+
-    t(122,104,'IDA 85-95°C','lb2')+t(122,206,'RETORNO','lb2')+
-    t(255,235,'Mezcla agua+glicol','lb2');
+/* ---------- Guías ---------- */
+var guias=[
+["🔌 Implantación del grupo de 600 kVA","<ul><li><b>Bancada:</b> losa nivelada para unas 4–6 t (mira la ficha), con anclajes y antivibratorios del fabricante.</li><li><b>Espacios:</b> acceso para sacar el equipo y ≈ 1 m libre alrededor.</li><li><b>Escape:</b> compensador, silenciador y aislamiento; contrapresión máxima del fabricante; salida lejos de tomas de aire.</li><li><b>Aire de sala:</b> combustión + ventilación, compuertas con silenciador, sin recirculación.</li><li><b>Combustible:</b> depósitos con cubeto, ventilación y nivel; normativa de instalaciones petrolíferas.</li><li><b>Conexión eléctrica:</b> unipolares en paralelo, misma longitud y sección, terminales de compresión, tramo flexible y par con llave dinamométrica.</li><li><b>Tierras:</b> bastidor, alternador y neutro según proyecto.</li></ul>"],
+["🔀 Cuadro de conmutación (ATS)","<ul><li><b>Montaje:</b> cuadro IEC 61439 nivelado, cables entrando por abajo, barras rotuladas y espacio para cables de 185–240 mm².</li><li><b>Potencia:</b> Red → Q1, GE → Q2, salida común al CGBT. Misma secuencia de fases en ambos orígenes (secuencímetro).</li><li><b>Control:</b> contacto de arranque, GE listo, posición de interruptores, tensión de red y grupo, emergencia.</li><li><b>Neutro:</b> con dos puestas a tierra, 4 polos.</li><li><b>Tiempos:</b> caída 3–5 s · transferencia 5–10 s · retorno 5–15 min · enfriamiento 3–5 min.</li><li><b>Pruebas:</b> enclavamiento, manual, automático con corte real, retorno, fallo de arranque y disparo por protección.</li></ul>"],
+["🧠 Cuadro de control (AMF)","<ul><li><b>Función:</b> arranque/parada automática, medida y protección.</li><li><b>Entradas:</b> presión de aceite, temperatura, nivel de combustible y refrigerante, emergencia, arranque remoto.</li><li><b>Salidas:</b> arranque, parada, compuertas, bomba de trasiego, alarma común.</li><li><b>Parámetros:</b> 400 V / 50 Hz, 3 intentos de arranque, calentamiento y enfriamiento, umbrales de alarma y paro.</li><li><b>Seguridad:</b> emergencia en cadena NC e inhibición de arranque en mantenimiento.</li><li>Comunicaciones Modbus o contactos a telegestión; anota los puntos en la lista de señales.</li></ul>"],
+["🔋 SSAA","<ul><li><b>Origen:</b> barra respaldada por el GE, con protección y selectividad propias.</li><li><b>Carga:</b> calentador, cargador, ventiladores del aero, bombas, compuertas, alumbrado y tomas.</li><li><b>Protecciones:</b> guardamotores o curva D; diferencial 300 mA para resistencias y 30 mA en tomas.</li><li><b>Cableado:</b> potencia y control en bandejas separadas, rotulado en ambos extremos y flexibles a máquinas vibrantes.</li><li><b>Pruebas:</b> con GE parado, calentador y cargador alimentados; con GE en marcha, aero y bombas funcionando.</li></ul>"],
+["🧪 Pruebas y puesta en marcha","<ol><li>Comprobaciones previas: par de apriete, rotulado, megado, secuencia de fases y tierras.</li><li>Hidráulica: llenado, purga, presiones y aero en marcha.</li><li>Combustible y baterías.</li><li>Arranque en vacío: 400 V, 50 Hz, presión de aceite, temperatura y vibraciones.</li><li>Banco de cargas 25–50–75–100 % anotando V, I, kW, temperaturas y presiones.</li><li>Transferencia real con corte de red y medida de tiempos.</li><li>Simulación de alarmas hasta el BMS.</li><li>Documentación: protocolos, as-built, manuales y formación.</li></ol>"],
+["🏢 Salas OBA (Telefónica)","<ul><li><b>Qué son:</b> salas de la central donde otros operadores colocan sus equipos (Oferta de Acceso al Bucle de Abonado). Confirma con el proyecto si es tu caso.</li><li><b>Energía:</b> normalmente -48 Vcc con baterías y respaldo del GE.</li><li><b>Clima:</b> precisión DX con N+1, detección de fugas y alarmas a telegestión.</li><li><b>Incendios:</b> detección, extinción y sellado de pasos según proyecto.</li><li><b>Operadores:</b> cada uno con sus bastidores; vigila reparto de carga, tierras y accesos.</li></ul>"],
+["📜 Normativa","<ul><li>REBT (RD 842/2002): ITC-BT-40, 19, 18 y 28.</li><li>Cuadros UNE-EN IEC 61439; transferencia IEC 60947-6-1; grupos ISO 8528.</li><li>Cables UNE 20460-5-52.</li><li>RITE, RD 552/2019 y F-Gas.</li><li>Combustible: MI-IP 03/04.</li><li>Incendios: RD 513/2017. Riesgo eléctrico: RD 614/2001.</li><li>Verifica versiones vigentes y las especificaciones técnicas de Telefónica.</li></ul>"],
+["⚠️ Seguridad eléctrica","<ul><li><b>5 reglas de oro:</b> corte visible, bloqueo, verificar ausencia de tensión, tierra y cortocircuito, y señalizar.</li><li><b>Doble alimentación:</b> hay tensión de retorno desde grupo o UPS. Pon el GE en OFF y desconecta baterías antes de intervenir.</li><li><b>Backfeed:</b> nunca conectes el GE a una red sin enclavamiento.</li><li><b>Arco eléctrico:</b> EPIs y distancias.</li><li><b>Baterías:</b> quita anillos y usa herramientas aisladas.</li><li><b>Gases y ruido:</b> nunca el GE en recinto cerrado; protección auditiva.</li></ul>"]
+];
+guias.forEach(function(x){var d=document.createElement("details");var s=document.createElement("summary");s.textContent=x[0];d.appendChild(s);d.appendChild(mk("div","body",x[1]));$("gui-list").appendChild(d);});
 
-  var parts1 = [
-   {n:1,x:65,y:150,name:"Motor (circuito de camisas)",d:"Es el equipo que hay que enfriar. Trabaja con agua+glicol a <b>80–95 °C</b> de salida y un ΔT de <b>5–10 K</b> entre ida y retorno. Su termostato interno desvía el flujo hasta alcanzar temperatura.<br>Algunos motores tienen un 2º circuito de baja temperatura (postenfriador, 40–55 °C) con su propio aerorrefrigerador."},
-   {n:2,x:295,y:148,name:"Aerorrefrigerador (dry cooler)",d:"Batería aleteada con ventiladores. Entra el líquido caliente por <b>arriba</b> y sale por <b>abajo</b>. Los ventiladores arrancan por escalones según temperatura del agua.<br>En obra: espacio libre para el aire, sin recirculación, nivelado, patas ancladas, tubería con compensadores de vibración y purgador en el punto alto. Se dimensiona con los kW de rechazo de calor de la ficha del motor."},
-   {n:3,x:180,y:168,name:"Bomba de circulación",d:"Vence la pérdida de carga de tuberías y aerorrefrigerador. Comprueba el <b>sentido de giro</b>, que no trabaje en seco y que haya presión positiva en la aspiración.<br>Se mide la presión antes y después de la bomba: la diferencia (ΔP) sirve para contrastar el caudal con su curva."},
-   {n:4,x:212,y:52,name:"Vaso de expansión",d:"Absorbe la dilatación del líquido al calentarse. Precarga de nitrógeno ≈ <b>H/10 + 0,3 bar</b> (H = altura en m al punto más alto), medida <b>con el vaso aislado y sin presión de agua</b>.<br>Se conecta cerca de la aspiración de la bomba, con válvula de aislamiento y vaciado. Calcúlalo en la pestaña Cálculo."},
-   {n:5,x:225,y:90,name:"Válvulas de corte",d:"Bola o mariposa PN16, aptas para glicol (juntas EPDM). Van a la entrada y salida de motor, bomba y aerorrefrigerador para poder aislar y mantener sin vaciar todo el circuito.<br>En servicio todas <b>abiertas</b> (nunca arrancar con la salida cerrada). Identifica y señaliza cada una. Las de retención solo dejan pasar el flujo en un sentido."},
-   {n:6,x:128,y:88,name:"Manómetros y termómetros",d:"Escala 0–6 o 0–10 bar, con glicerina y llave de aislamiento. Pon uno en impulsión y otro en aspiración de la bomba, y termómetros en ida y retorno.<br><b>Referencia:</b> llenado en frío 1–1,5 bar (mín. H/10 + 0,5) · trabajo 1,5–2,5 bar · válvula de seguridad 3 bar (según fabricante). Si baja la presión hay fuga; si sube mucho, revisa el vaso."},
-   {n:7,x:318,y:62,name:"Purgador de aire",d:"Automático en el punto alto del aerorrefrigerador, con válvula de corte. Manual en otros puntos altos. El aire provoca cavitación, ruido y mala refrigeración.<br>Purga durante el llenado y repite tras 24 h de funcionamiento y al cambiar de temperatura."},
-   {n:8,x:205,y:168,name:"Filtro Y y retención",d:"Filtro Y de malla 0,5–1 mm en la aspiración de la bomba para retener la suciedad de obra. <b>Límpialo</b> tras las primeras horas de funcionamiento y comprueba que el ΔP del filtro no sube.<br>La válvula de retención tras la bomba evita el flujo inverso."},
-   {n:9,x:262,y:222,name:"Llenado, drenaje y seguridad",d:"Llena con la <b>mezcla ya preparada</b> (agua desmineralizada + glicol con inhibidores), con bomba de llenado o carro. No añadas glicol puro ni mezclas de marcas distintas.<br>La válvula de seguridad (≈3 bar) debe descargar a un punto visible y seguro. El punto bajo lleva válvula de drenaje."},
-   {n:10,x:60,y:68,name:"Glicol: porcentaje y litros",d:"Etilenglicol con inhibidores (propilenglicol si hay riesgo alimentario o ambiental).<br>Protección aprox.: <b>30 % → −13 °C</b> · <b>40 % → −23 °C</b> · <b>50 % → −37 °C</b>. Elige la mezcla para la temperatura mínima de la zona con margen de unos 5 K. No pases del 50 %: pierde capacidad de enfriar y sube la pérdida de carga.<br>Litros de glicol = volumen total × %. Mide con refractómetro."}
-  ];
-  var notes1 = "<b>Resumen rápido</b><br>• Presión de llenado en frío: 1–1,5 bar<br>• Presión de trabajo: 1,5–2,5 bar<br>• Válvula de seguridad: ≈ 3 bar<br>• Temperatura de ida: 85–95 °C · ΔT 5–10 K<br>• Glicol: 30–50 % según temperatura mínima<br>• Precarga del vaso: H/10 + 0,3 bar<br>• Purgar y limpiar filtro Y tras 24 h";
+/* ---------- Calculadoras ---------- */
+var STD=[100,125,160,200,250,320,400,500,630,800,1000,1250,1600,2000,2500,3200];
+var CAB=[[50,242],[70,310],[95,377],[120,437],[150,504],[185,575],[240,679],[300,783],[400,940],[500,1083],[630,1254]];
+var PT={R410A:[[0,7.0],[5,8.3],[10,9.8],[40,23.2],[45,26.3],[50,29.6]],R32:[[0,7.1],[5,8.5],[10,10.0],[40,23.8],[45,27.0],[50,30.3]],R134a:[[0,1.9],[5,2.5],[10,3.1],[40,9.2],[45,10.6],[50,12.2]]};
+var PCT=[["30","Glicol 30 %"],["35","Glicol 35 %"],["40","Glicol 40 %"],["50","Glicol 50 %"]];
+var calcs=[
+{g:"el",t:"Corriente y protección del grupo",f:[["kva","Potencia (kVA)",600],["v","Tensión (V)",400],["cos","cos φ",0.8],["xd","X''d (p.u.)",0.15]],b:"Calcular",run:function(v){
+ if(!(v.kva>0&&v.v>0&&v.xd>0))return "Datos inválidos.";
+ var I=v.kva*1000/(Math.sqrt(3)*v.v),br=STD.filter(function(x){return x>=I;})[0]||"—";
+ return "Corriente nominal: <b>"+fmt(I,0)+" A</b><br>Potencia activa: <b>"+fmt(v.kva*v.cos,0)+" kW</b><br>Interruptor mínimo normalizado: <b>"+br+" A</b><br>Icc del alternador (aprox.): <b>"+fmt(I/v.xd/1000,1)+" kA</b><br><span class='hint'>El poder de corte debe cubrir también la Icc de la red. Valida con el proyecto.</span>";}},
+{g:"el",t:"Sección de cable y caída de tensión",h:"Cobre XLPE 0,6/1 kV unipolares en bandeja (aprox.).",f:[["i","Corriente (A)",866],["l","Longitud (m)",25],["k","Factor corrección",0.8],["v","Tensión (V)",400]],b:"Calcular opciones",run:function(v){
+ if(!(v.i>0&&v.l>0&&v.k>0&&v.v>0))return "Datos inválidos.";
+ var o="<table><tr><th>Cables/fase</th><th>Sección</th><th>ΔU %</th></tr>",found=0;
+ for(var n=1;n<=6&&found<4;n++){var sel=null;for(var i=0;i<CAB.length;i++){if(CAB[i][1]*v.k*n>=v.i){sel=CAB[i];break;}}
+  if(!sel)continue;var R=0.0256/sel[0],X=0.00008,In=v.i/n,du=Math.sqrt(3)*In*v.l*(R*0.8+X*0.6)/v.v*100;
+  o+="<tr><td>"+n+"</td><td>"+sel[0]+" mm²</td><td>"+fmt(du,2)+"</td></tr>";found++;}
+ return found?o+"</table><span class='hint'>Límite habitual 3–5 %. Cálculo orientativo, no sirve para firmar.</span>":"Ninguna sección cumple: aumenta cables o revisa el factor.";}},
+{g:"el",t:"Combustible y autonomía",f:[["kva","kVA",600],["ld","Carga (%)",75],["tk","Depósito (L)",2000],["sfc","Consumo (L/kWh)",0.26]],b:"Calcular",run:function(v){
+ if(!(v.kva>0&&v.ld>0&&v.sfc>0))return "Datos inválidos.";
+ var kw=v.kva*0.8*v.ld/100,lh=kw*v.sfc;
+ return "Potencia: <b>"+fmt(kw,0)+" kW</b><br>Consumo: <b>"+fmt(lh,0)+" L/h</b><br>Autonomía: <b>"+fmt(v.tk/lh,1)+" h</b><br>Para 24 h: <b>"+fmt(lh*24,0)+" L</b> · 72 h: <b>"+fmt(lh*72,0)+" L</b>";}},
+{g:"el",t:"Carga de servicios auxiliares (SSAA)",h:"Potencias en kW de la ficha de cada equipo.",f:[["h","Calentador camisas",3],["c","Cargador baterías",0.6],["a","Ventiladores aero",6],["p","Bombas",2.2],["v","Ventilación sala",2.2],["o","Alumbrado y otros",1.5]],b:"Calcular",run:function(v){
+ var tot=0;["h","c","a","p","v","o"].forEach(function(k){tot+=v[k]||0;});if(tot<=0)return "Introduce potencias.";
+ var I=tot*1000/(Math.sqrt(3)*400*0.85),pr=I*1.25,st=[10,16,20,25,32,40,50,63,80,100,125,160,200,250],br=st.filter(function(x){return x>=pr;})[0]||"—";
+ return "Total: <b>"+fmt(tot,1)+" kW</b><br>Corriente (400 V, cos φ 0,85): <b>"+fmt(I,1)+" A</b><br>Interruptor general: <b>"+br+" A</b> (margen 25 %)<br><span class='hint'>Suma todo simultáneo. El calentador solo trabaja con GE parado.</span>";}},
+{g:"hy",t:"Glicol, volumen y vaso de expansión",f:[["motor","Motor (L)","","Ej. 120"],["dc","Aerorrefrigerador (L)","","Ej. 90"],["dn","Diámetro tubería",2.2,"",[["0.58","DN25"],["1.0","DN32"],["1.3","DN40"],["2.2","DN50"],["3.7","DN65"],["5.3","DN80"],["9.0","DN100"]]],["len","Longitud total (m)","","Ej. 60"],["pct","% glicol",30,"",[["30","30 %"],["35","35 %"],["40","40 %"],["50","50 %"]]],["h","Altura vaso→punto alto (m)","","Ej. 8"],["sv","Tarado seguridad (bar)",3]],b:"Calcular",run:function(v){
+ if(isNaN(v.h)||!(v.sv>0))return "Indica altura y tarado.";
+ var pipes=v.dn*(v.len||0),tot=(v.motor||0)+(v.dc||0)+pipes;if(tot<=0)return "Introduce volúmenes.";
+ var gly=tot*v.pct/100,e={30:0.040,35:0.042,40:0.044,50:0.050}[v.pct],p0=Math.max(0.5,v.h/10+0.3),pm=0.9*v.sv;
+ var r="Tuberías: <b>"+fmt(pipes,0)+" L</b> · Total: <b>"+fmt(tot,0)+" L</b><br>Glicol "+v.pct+" %: <b>"+fmt(gly,0)+" L</b> (pide ≈ "+fmt(gly*1.05,0)+" L)<br>Agua desmineralizada: <b>"+fmt(tot-gly,0)+" L</b><br>Precarga del vaso: <b>"+fmt(p0,1)+" bar</b><br>";
+ if(pm<=p0)return r+"⚠️ La presión máxima no supera la precarga: revisa altura y tarado.";
+ return r+"Vaso mínimo: <b>"+fmt(tot*e/(1-(p0+1)/(pm+1)),0)+" L</b> (comercial inmediato superior)";}},
+{g:"hy",t:"Caudal de glicol del circuito",f:[["kw","Calor a disipar (kW)","","Ej. 250"],["dt","ΔT (K)",8],["pct","Mezcla",30,"",[["0","Agua"],["30","Glicol 30 %"],["40","Glicol 40 %"],["50","Glicol 50 %"]]]],b:"Calcular caudal",run:function(v){
+ if(!(v.kw>0&&v.dt>0))return "Datos inválidos.";
+ var cp={0:4.18,30:3.80,40:3.65,50:3.45}[v.pct],rho={0:0.998,30:1.04,40:1.05,50:1.07}[v.pct],m3h=v.kw/(cp*v.dt)/rho*3.6;
+ return "Caudal: <b>"+fmt(m3h,1)+" m³/h</b> = "+fmt(m3h*1000/3600,2)+" L/s";}},
+{g:"hy",t:"Caudal de aire de una sala técnica",h:"Q = P / (0,34 · ΔT)",f:[["kw","Carga térmica (kW)",35],["dt","ΔT aire (K)",10]],b:"Calcular aire",run:function(v){
+ if(!(v.kw>0&&v.dt>0))return "Datos inválidos.";var q=v.kw*1000/(0.34*v.dt);
+ return "Caudal: <b>"+fmt(q,0)+" m³/h</b> ("+fmt(q/3600,2)+" m³/s)<br>= "+fmt(v.kw*3412,0)+" BTU/h · "+fmt(v.kw/3.517,1)+" TR";}},
+{g:"hy",t:"Presión según temperatura (refrigerante)",f:[["gas","Refrigerante","R410A","",[["R410A","R410A"],["R32","R32"],["R134a","R134a"]]]],b:"Ver tabla",run:function(v){
+ var h="<table><tr><th>Temp. sat. (°C)</th><th>Presión (bar g)</th></tr>";PT[v.gas].forEach(function(r){h+="<tr><td>"+r[0]+"</td><td>"+r[1]+"</td></tr>";});
+ return h+"</table><span class='hint'>Orientativo. Solo personal con certificado F-Gas manipula refrigerante.</span>";}}
+];
+calcs.forEach(function(c){
+ var card=mk("div","card"),h="";
+ h+="";card.appendChild(mk("h2","",c.t));
+ if(c.h)card.appendChild(mk("p","hint",c.h));
+ var wrap=document.createElement("div");wrap.className="row";wrap.style.flexWrap="wrap";
+ c.f.forEach(function(f,i){
+  var d=document.createElement("div");d.style.flex="1 1 45%";
+  var lb=document.createElement("label");lb.textContent=f[1];d.appendChild(lb);
+  var el;
+  if(f[4]){el=document.createElement("select");f[4].forEach(function(o){var op=document.createElement("option");op.value=o[0];op.textContent=o[1];if(String(o[0])===String(f[2]))op.selected=true;el.appendChild(op);});}
+  else{el=document.createElement("input");el.type="number";el.setAttribute("inputmode","decimal");el.step="any";el.value=f[2];if(f[3])el.placeholder=f[3];}
+  el.setAttribute("data-k",f[0]);lb.appendChild(document.createTextNode(""));d.appendChild(el);wrap.appendChild(d);});
+ card.appendChild(wrap);
+ var btn=document.createElement("button");btn.className="calc";btn.textContent=c.b;card.appendChild(btn);
+ var out=document.createElement("div");out.className="result";card.appendChild(out);
+ btn.addEventListener("click",function(){var v={};card.querySelectorAll("[data-k]").forEach(function(x){var s=x.value,nv=parseFloat(s);v[x.getAttribute("data-k")]=isNaN(nv)?(x.tagName==="SELECT"?s:NaN):nv;});out.innerHTML=c.run(v);});
+ $("g-"+c.g).appendChild(card);
+});
+$("calc-chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;
+ document.querySelectorAll("#calc-chips .chip").forEach(function(c){c.classList.toggle("active",c===b);});
+ document.querySelectorAll(".grp").forEach(function(g){g.classList.toggle("active",g.id==="g-"+b.getAttribute("data-g"));});});
 
-  var svg2 = DEFS +
-    '<rect x="20" y="30" width="130" height="95" rx="8" fill="#334155" stroke="#64748b"/>'+t(24,24,'UNIDAD INTERIOR','lb2')+
-    '<rect x="220" y="30" width="125" height="150" rx="8" fill="#1e3a5f" stroke="#38bdf8"/>'+t(224,24,'UNIDAD EXTERIOR','lb2')+
-    line('M325,70 V45 H135 V70',LIQ,2.5,false)+v(135,58)+v(190,45)+
-    line('M135,70 V85 H120',LIQ,2.5)+
-    line('M120,85 l-10,-12 l-10,24 l-10,-24 l-10,24 l-10,-24 l-10,24 l-10,-12 L40,85',COLD,2.5)+
-    line('M40,85 V108 H232 V140 H237',COLD,3.5)+
-    '<circle cx="255" cy="140" r="18" fill="#0f172a" stroke="#ef4444" stroke-width="2"/>'+t(243,143,'COMP','lb2')+
-    line('M255,122 V90 H235',HOT,3)+
-    line('M235,70 l10,-12 l10,24 l10,-24 l10,24 l10,-24 l10,24 l10,-12 L325,70',HOT,2.5)+
-    line('M255,100 H270','#94a3b8',1.5)+g(278,100)+
-    line('M205,108 V122','#94a3b8',1.5)+g(205,128)+
-    '<circle cx="310" cy="135" r="20" fill="none" stroke="#94a3b8"/>'+t(292,166,'ventilador','lb2')+
-    t(60,115,'EVAPORADOR','lb2')+t(250,60,'CONDENSADOR','lb2')+
-    t(25,150,'Línea líquido (fina, naranja)','lb2')+t(25,162,'Línea aspiración (gruesa, aislada)','lb2');
-  var parts2 = [
-   {n:1,x:80,y:55,name:"Evaporador (interior)",d:"El refrigerante líquido se evapora y absorbe calor del aire de la sala. Aquí aparece el <b>condensado</b>: la bandeja debe tener pendiente y desagüe (sifón o bomba de condensados).<br>Evaporación típica R410A: 5–10 °C (≈ 8,3–9,8 bar g). Filtros limpios y ventilador libre."},
-   {n:2,x:158,y:72,name:"Expansión (válvula/capilar)",d:"Baja la presión del líquido para que se evapore a baja temperatura. En split doméstico suele ser válvula electrónica (EEV) o capilar; en sistemas mayores, termostática (TXV).<br>Regula el <b>sobrecalentamiento</b> (5–8 K) para que al compresor solo llegue gas."},
-   {n:3,x:282,y:165,name:"Compresor",d:"Comprime el gas y sube su presión y temperatura. Inverter o on/off. Comprueba tensión, giro (scroll) e intensidad frente a placa.<br>Nunca arrancar con el gas sin vacío previo ni con las llaves de servicio cerradas."},
-   {n:4,x:280,y:84,name:"Condensador (exterior)",d:"El gas caliente cede calor al aire exterior y pasa a líquido. Batería limpia, con distancias de servicio y sin recirculación de aire.<br>Condensación típica R410A: 40–50 °C (≈ 23–30 bar g). Si la presión de alta es excesiva: suciedad, ventilador parado o exceso de gas."},
-   {n:5,x:180,y:33,name:"Línea de líquido",d:"Tubo fino. Sale del condensador subenfriado (4–8 K). Lleva filtro deshidratador y visor en equipos mayores. Cuando hay burbujas en el visor suele haber falta de gas."},
-   {n:6,x:110,y:132,name:"Línea de aspiración",d:"Tubo grueso, <b>siempre aislado</b> (evita condensación y ganancias de calor). Retorna el gas al compresor. Con pendiente hacia el compresor y trampas de aceite en ascendentes largas (≈ cada 6 m)."},
-   {n:7,x:205,y:145,name:"Manómetros / puertos de servicio",d:"Baja (aspiración) y alta (descarga). Orientativo R410A: baja 8–10 bar g, alta 23–30 bar g.<br>Ejecución de obra: soldadura con nitrógeno, prueba de estanqueidad, <b>vacío a 500 micrones</b> y carga solo por personal con certificado F-Gas."}
-  ];
-  var notes2 = "<b>Resumen rápido (R410A)</b><br>• Baja: 8–10 bar g (evap. 5–10 °C)<br>• Alta: 23–30 bar g (cond. 40–50 °C)<br>• Sobrecalentamiento: 5–8 K · Subenfriamiento: 4–8 K<br>• Vacío: 500 micrones, con nitrógeno en soldadura<br>• Límites de longitud/desnivel: los fija el fabricante<br>• Cumplir RD 552/2019 y normativa F-Gas";
+/* ---------- Asistente ---------- */
+var KB=[
+{k:"glicol mezcla porcentaje anticongelante litros",a:"<b>Glicol:</b> 30 % → −13 °C, 40 % → −23 °C, 50 % → −37 °C aprox. Elige según la temperatura mínima con ~5 K de margen y no pases del 50 %. Litros = volumen total × %."},
+{k:"presion llenado trabajo circuito grupo electrogeno bar",a:"<b>Presiones:</b> llenado en frío 1–1,5 bar, trabajo 1,5–2,5 bar, seguridad ≈ 3 bar. Confirma con el manual del motor."},
+{k:"vaso expansion precarga",a:"<b>Vaso:</b> precarga ≈ H/10 + 0,3 bar con el vaso aislado y sin presión de líquido, en la aspiración de la bomba."},
+{k:"valvula valvuleria corte bola mariposa retencion",a:"<b>Valvulería:</b> corte PN16, retención tras la bomba, filtro Y en aspiración, purgadores arriba y drenajes abajo. Juntas EPDM. En servicio, todas abiertas."},
+{k:"manometro termometro escala lectura",a:"<b>Manómetros:</b> 0–6 o 0–10 bar con glicerina y llave. Uno a cada lado de la bomba y termómetros en ida y retorno."},
+{k:"purgar aire purga purgador cavitacion ruido",a:"<b>Purga:</b> llena despacio, abre los purgadores altos, haz circular la bomba y repite a las 24 h."},
+{k:"split ciclo frigorifico presiones r410a baja alta",a:"<b>Split R410A:</b> baja 8–10 bar g, alta 23–30 bar g, sobrecalentamiento 5–8 K, subenfriamiento 4–8 K."},
+{k:"vacio nitrogeno soldadura estanqueidad carga gas f-gas",a:"<b>Frigorífico:</b> soldar con nitrógeno, prueba de presión, vacío a 500 micras y carga solo con certificado F-Gas."},
+{k:"tecnair stulz dx 35 kw sala oba precision clima",a:"<b>DX 35 kW:</b> scroll, EEV, ventilador EC y condensador remoto. 22–24 °C y 40–60 % HR. Aire ≈ 10.300 m³/h con ΔT 10 K."},
+{k:"oba que es sala operadores",a:"<b>OBA:</b> Oferta de Acceso al Bucle de Abonado: salas donde otros operadores colocan sus equipos. Energía -48 Vcc con respaldo y clima N+1. Confirma requisitos con el proyecto."},
+{k:"corriente 600 kva amperios intensidad 400 v",a:"<b>600 kVA a 400 V:</b> I = 600000 / (√3·400) ≈ <b>866 A</b>. Prime ≈ 480 kW. Interruptor normalizado: 1000 A."},
+{k:"ats conmutacion transferencia cuadro enclavamiento",a:"<b>Conmutación:</b> Q1 (red) y Q2 (GE) motorizados con enclavamiento mecánico y eléctrico, controlador ATS/AMF y barras de salida. 4 polos si el neutro se pone a tierra en dos puntos."},
+{k:"tiempos retardo transferencia retorno enfriamiento arranque",a:"<b>Tiempos típicos:</b> caída de red 3–5 s, estabilización 5–10 s, retorno 5–15 min, enfriamiento 3–5 min."},
+{k:"ssaa servicios auxiliares cuadro calentador cargador",a:"<b>SSAA:</b> calentador, cargador, ventiladores del aero, bombas, compuertas y alumbrado, desde barra respaldada por el GE."},
+{k:"cable seccion paralelo bornes par apriete",a:"<b>Cables:</b> para 866 A son habituales 2 × 185 mm² o 3 × 120 mm² por fase en Cu XLPE. Terminales de compresión y par con llave dinamométrica."},
+{k:"megado aislamiento prueba banco carga puesta marcha",a:"<b>Pruebas:</b> megado, secuencia, banco de cargas 25–50–75–100 %, transferencia real y alarmas al BMS."},
+{k:"tierra neutro equipotencial puesta tierra",a:"<b>Tierras:</b> equipotencialidad de bastidor, cuadro, aero, tuberías y bandejas. Neutro según proyecto. Mide y anota la resistencia."},
+{k:"seguridad reglas oro tension retorno backfeed bloqueo",a:"<b>Seguridad:</b> 5 reglas de oro, GE en OFF y baterías desconectadas antes de intervenir, y vigila la tensión de retorno."},
+{k:"combustible autonomia deposito consumo litros diesel",a:"<b>Combustible:</b> 600 kVA al 75 % ≈ 115–120 L/h. Con 2000 L ≈ 17 h."}
+];
+function localAnswer(q){
+ var w=norm(q).split(/\s+/).filter(function(x){return x.length>2;}),best=null,bs=0;
+ KB.forEach(function(e){var ks=e.k.split(" "),sc=0;w.forEach(function(x){ks.forEach(function(k){if(k.indexOf(x)===0||(x.length>3&&k.indexOf(x)>-1)||(k.length>3&&x.indexOf(k)===0))sc++;});});if(sc>bs){bs=sc;best=e;}});
+ return best?best.a:"No tengo ese dato en la base local. Conecta una IA real en ⚙️ para consultas libres.";
+}
+function addMsg(t,who,asText){var d=document.createElement("div");d.className="msg "+who+(asText?" ia":"");if(asText)d.textContent=t;else d.innerHTML=t;$("chat").appendChild(d);$("chat").scrollTop=$("chat").scrollHeight;return d;}
+var SYS="Eres un asistente técnico experto para un jefe de obra de instalaciones en centrales de Telefónica (España): grupos electrógenos de unos 600 kVA, cuadros de conmutación/ATS/AMF, SSAA, cuadros de control, circuitos de glicol con aerorrefrigerador, climatización de precisión (Tecnair/Stulz DX 35 kW) y salas OBA. Responde en español, con pasos claros, valores típicos y unidades. Sé conciso. Avisa de que el proyecto, el manual del fabricante, la normativa interna de Telefónica y el REBT/RITE/F-Gas prevalecen. Sé prudente con la seguridad eléctrica y no inventes datos de modelos concretos.";
+var hist=[];
+function loadCfg(){try{return JSON.parse(localStorage.getItem("obratech_ai")||"{}");}catch(e){return {};}}
+function badge(){var c=loadCfg(),b=$("ai-badge");if(c.key){b.textContent="IA activa";b.classList.remove("off");}else{b.textContent="Modo local";b.classList.add("off");}}
+(function(){var c=loadCfg();if(c.prov)$("ai-prov").value=c.prov;if(c.model)$("ai-model").value=c.model;if(c.key)$("ai-key").value=c.key;badge();})();
+$("ai-save").addEventListener("click",function(){
+ var p=$("ai-prov").value,m=$("ai-model").value.trim()||(p==="anthropic"?"claude-sonnet-4-5":"gpt-4o-mini");$("ai-model").value=m;
+ try{localStorage.setItem("obratech_ai",JSON.stringify({prov:p,key:$("ai-key").value.trim(),model:m}));}catch(e){}
+ badge();addMsg("Configuración guardada.","bot");});
+$("ai-clear").addEventListener("click",function(){try{localStorage.removeItem("obratech_ai");}catch(e){}$("ai-key").value="";badge();addMsg("Clave borrada. Vuelves al modo local.","bot");});
+async function callAI(q){
+ var c=loadCfg();hist.push({role:"user",content:q});var h=hist.slice(-10),res,data,txt;
+ if(c.prov==="openai"){
+  res=await fetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+c.key},body:JSON.stringify({model:c.model,messages:[{role:"system",content:SYS}].concat(h)})});
+  data=await res.json();if(!res.ok)throw new Error((data.error&&data.error.message)||res.status);txt=data.choices[0].message.content;
+ }else{
+  res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":c.key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:c.model,max_tokens:1200,system:SYS,messages:h})});
+  data=await res.json();if(!res.ok)throw new Error((data.error&&data.error.message)||res.status);txt=data.content.map(function(b){return b.text||"";}).join("");
+ }
+ hist.push({role:"assistant",content:txt});return txt;
+}
+async function send(q){
+ q=q.trim();if(!q)return;addMsg(q,"user",true);$("ai-q").value="";
+ var c=loadCfg();if(!c.key){addMsg(localAnswer(q),"bot");return;}
+ var w=addMsg("Pensando…","bot",true);
+ try{w.textContent=await callAI(q);}catch(err){hist.pop();w.textContent="Error de IA: "+err.message+". Respuesta local: "+localAnswer(q).replace(/<[^>]+>/g,"");}
+ $("chat").scrollTop=$("chat").scrollHeight;
+}
+addMsg("Hola 👋 Pregúntame por el grupo de 600 kVA, conmutación, SSAA, glicol, válvulas, clima o salas OBA. Para respuestas libres con IA, conecta tu clave en ⚙️.","bot");
+var qh="";["Corriente 600 kVA","Tiempos del ATS","¿Qué es SSAA?","¿Cuánto glicol?","Pruebas puesta en marcha","¿Qué es sala OBA?"].forEach(function(q){qh+='<button class="chip">'+q+'</button>';});
+$("ai-chips").innerHTML=qh;
+$("ai-chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(b)send(b.textContent);});
+$("ai-btn").addEventListener("click",function(){send($("ai-q").value);});
+$("ai-q").addEventListener("keydown",function(e){if(e.key==="Enter")send($("ai-q").value);});
 
-  var svg3 = DEFS +
-    '<rect x="15" y="125" width="205" height="155" rx="4" fill="none" stroke="#475569" stroke-dasharray="4 3"/>'+t(20,120,'SALA TÉCNICA','lb2')+
-    '<line x1="235" y1="20" x2="235" y2="280" stroke="#64748b" stroke-dasharray="5 4"/>'+t(238,290,'exterior','lb2')+
-    '<rect x="25" y="140" width="70" height="125" rx="6" fill="#334155" stroke="#64748b"/>'+t(32,160,'CRAC DX','lb')+t(32,172,'35 kW','lb2')+t(30,200,'scroll + EEV','lb2')+t(30,212,'evap + EC fan','lb2')+t(30,224,'filtros + hum.','lb2')+
-    '<rect x="125" y="165" width="22" height="80" fill="#1e3a5f" stroke="#38bdf8"/><rect x="155" y="165" width="22" height="80" fill="#1e3a5f" stroke="#38bdf8"/><rect x="185" y="165" width="22" height="80" fill="#1e3a5f" stroke="#38bdf8"/>'+t(130,260,'RACKS','lb2')+
-    line('M97,235 H122',COLD,3,true)+
-    line('M200,160 C160,120 110,120 80,138',HOT,2.5,true)+
-    line('M70,140 V80 H265',HOT,3)+
-    line('M85,140 V62 H265',LIQ,2.5)+
-    '<path d="M70,110 h-6 v-8 h12 v8 h-6" fill="none" stroke="#a78bfa" stroke-width="1.5"/>'+
-    v(160,62)+v(160,80)+g(190,56)+
-    '<rect x="265" y="40" width="85" height="60" rx="6" fill="#1e3a5f" stroke="#38bdf8"/><circle cx="290" cy="70" r="14" fill="none" stroke="#94a3b8"/><circle cx="328" cy="70" r="14" fill="none" stroke="#94a3b8"/>'+t(268,35,'CONDENSADOR REMOTO','lb2')+
-    t(130,56,'Líquido','lb2')+t(130,96,'Gas caliente','lb2')+
-    line('M35,265 V285','#38bdf8',1.5)+t(42,284,'Condensados','lb2')+
-    t(100,247,'aire frío','lb2')+t(110,136,'retorno','lb2');
-  var parts3 = [
-   {n:1,x:60,y:195,name:"Equipo de precisión DX 35 kW",d:"Unidad tipo Tecnair / Stulz de expansión directa para sala técnica. Controla temperatura y humedad con alta fiabilidad (24/7). Consigna típica: <b>22–24 °C</b> y <b>40–60 % HR</b>, según criterio del cliente (ASHRAE).<br>Configuración habitual: 2 circuitos o 2 compresores scroll, válvula de expansión electrónica, ventilador EC, filtros, humidificador y resistencias de apoyo. Puede ser de impulsión por suelo técnico o frontal."},
-   {n:2,x:60,y:152,name:"Circuito frigorífico interior",d:"Compresor scroll → (gas caliente al condensador remoto) → líquido vuelve → válvula de expansión (EEV) → evaporador. Presostatos de alta/baja, filtro deshidratador, visor y válvula solenoide.<br>Caudal de aire de 35 kW con ΔT de 10 K ≈ <b>10.300 m³/h</b> (calculable en la pestaña Cálculo)."},
-   {n:3,x:200,y:96,name:"Línea de gas caliente (descarga)",d:"Va del compresor al condensador remoto. Está muy caliente (60–100 °C): no tocar sin protección y con aislamiento o protección según proyecto.<br>Dimensionada por el fabricante para velocidad de aceite correcta. En ascendentes verticales: <b>trampa de aceite</b> y sifón invertido en el condensador si éste queda por encima."},
-   {n:4,x:200,y:50,name:"Línea de líquido",d:"Del condensador al equipo. Lleva válvulas de corte, filtro deshidratador y visor. Aislarla donde pase por zonas calientes para mantener el subenfriamiento. Pendientes y soportes cada 1,5–2 m."},
-   {n:5,x:308,y:92,name:"Condensador remoto",d:"Batería con ventiladores EC y control de presión de condensación (variación de velocidad). Ubicación con espacio libre y sin recirculación, anclajes antivibratorios. En climas fríos puede necesitar control para invierno (kit de baja temperatura).<br>Tuberías y conexiones del fabricante; comprobar que la longitud equivalente y el desnivel entran en tablas."},
-   {n:6,x:45,y:112,name:"Trampa de aceite",d:"En ascendentes de gas caliente o aspiración, una trampa cada ~6–7 m de altura recoge el aceite y lo arrastra de vuelta al compresor. Sin ellas, el compresor se queda sin aceite. Se hace con curvas en U soldadas, según detalle del fabricante."},
-   {n:7,x:165,y:255,name:"Racks y pasillo frío",d:"El aire frío del CRAC debe entrar por el frente de los racks y salir caliente por la parte trasera. Cierra huecos con paneles ciegos y valora confinamiento de pasillo frío o caliente. Evita cortocircuito de aire entre impulsión y retorno."},
-   {n:8,x:140,y:112,name:"Recorrido del aire",d:"Frío (azul) impulsado hacia los racks; caliente (rojo) vuelve por arriba al retorno del equipo. Sensor de temperatura a la altura de la toma de los racks. Mantén libre la zona de servicio frontal del equipo (≈ 1 m)."},
-   {n:9,x:40,y:272,name:"Condensados, humidificador y agua",d:"Desagüe con sifón y pendiente, bandeja de seguridad y detección de fugas en sala. El humidificador (si lleva) necesita alimentación de agua con válvula y filtro.<br>Redundancia: lo habitual es N+1 con alternancia y automatismo de rotación. Comprueba aviso de alarmas a BMS (Modbus/SNMP)."}
-  ];
-  var notes3 = "<b>Resumen rápido (DX 35 kW)</b><br>• Aire: ≈ 10.300 m³/h con ΔT 10 K<br>• Consigna: 22–24 °C · 40–60 % HR<br>• Gas caliente + líquido hacia condensador remoto<br>• Trampa de aceite cada 6–7 m en ascendentes<br>• Vacío 500 micrones y carga certificada F-Gas<br>• Redundancia N+1 y alarma al BMS<br>• Hojas del fabricante mandan en longitudes y diámetros<br>• Confirma si tu 'sala OBA' tiene requisitos propios del cliente";
-
-  var schemes = {
-    gen:{title:"Grupo + aerorrefrigerador", svg:svg1, parts:parts1, notes:notes1, vb:"0 0 360 250"},
-    split:{title:"Split / ciclo frigorífico", svg:svg2, parts:parts2, notes:notes2, vb:"0 0 360 190"},
-    dx:{title:"DX 35 kW sala técnica", svg:svg3, parts:parts3, notes:notes3, vb:"0 0 360 295"}
-  };
-  var curS = "gen";
-  function mk(p){ return '<g class="mk" data-n="'+p.n+'"><circle cx="'+p.x+'" cy="'+p.y+'" r="9"/><text x="'+p.x+'" y="'+(p.y+3.5)+'" text-anchor="middle">'+p.n+'</text></g>'; }
-  function renderScheme(key){
-    curS = key; var s = schemes[key];
-    var m = ""; s.parts.forEach(function(p){m += mk(p);});
-    $("sch-view").innerHTML = '<svg viewBox="'+s.vb+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="'+s.title+'">'+s.svg+m+'</svg>';
-    var l = ""; s.parts.forEach(function(p){ l += '<button data-n="'+p.n+'">'+p.n+'. '+p.name+'</button>'; });
-    $("sch-list").innerHTML = l;
-    $("sch-notes").innerHTML = s.notes;
-    $("sch-info").innerHTML = "Toca un número del esquema o de la lista.";
-    document.querySelectorAll("#sch-chips .chip").forEach(function(c){ c.classList.toggle("active", c.getAttribute("data-k")===key); });
-  }
-  function selectPart(n){
-    var s = schemes[curS], p = null;
-    s.parts.forEach(function(x){ if(x.n===n) p = x; });
-    if(!p) return;
-    $("sch-info").innerHTML = "<strong>"+p.n+". "+p.name+"</strong><br>"+p.d;
-    document.querySelectorAll("#sch-view .mk").forEach(function(m){ m.classList.toggle("sel", parseInt(m.getAttribute("data-n"),10)===n); });
-    document.querySelectorAll("#sch-list button").forEach(function(b){ b.classList.toggle("sel", parseInt(b.getAttribute("data-n"),10)===n); });
-  }
-  var chipsHtml = "";
-  Object.keys(schemes).forEach(function(k){ chipsHtml += '<button class="chip" data-k="'+k+'">'+schemes[k].title+'</button>'; });
-  $("sch-chips").innerHTML = chipsHtml;
-  $("sch-chips").addEventListener("click", function(e){ var b = e.target.closest(".chip"); if(b) renderScheme(b.getAttribute("data-k")); });
-  $("sch-view").addEventListener("click", function(e){ var m = e.target.closest(".mk"); if(m) selectPart(parseInt(m.getAttribute("data-n"),10)); });
-  $("sch-list").addEventListener("click", function(e){ var b = e.target.closest("button"); if(b){ selectPart(parseInt(b.getAttribute("data-n"),10)); $("sch-info").scrollIntoView({behavior:"smooth",block:"nearest"}); } });
-  renderScheme("gen");
-
-  /* ---------- Calculators ---------- */
-  $("g-btn").addEventListener("click", function(){
-    var motor = parseFloat($("g-motor").value)||0, dc = parseFloat($("g-dc").value)||0;
-    var lpm = parseFloat($("g-dn").value), len = parseFloat($("g-len").value)||0;
-    var pct = parseFloat($("g-pct").value), H = parseFloat($("g-h").value), sv = parseFloat($("g-sv").value);
-    if(isNaN(H) || isNaN(sv) || sv<=0){ $("g-out").textContent = "Indica altura y tarado de la válvula."; return; }
-    var pipes = lpm*len, total = motor+dc+pipes;
-    if(total<=0){ $("g-out").textContent = "Introduce volúmenes."; return; }
-    var gly = total*pct/100, wat = total-gly;
-    var e = {30:0.040,35:0.042,40:0.044,50:0.050}[pct];
-    var p0 = Math.max(0.5, H/10+0.3), pmax = 0.9*sv;
-    var res = "Volumen tuberías: <b>"+fmt(pipes,0)+" L</b><br>Volumen total: <b>"+fmt(total,0)+" L</b><br>Glicol "+pct+" %: <b>"+fmt(gly,0)+" L</b> (pide ≈ "+fmt(gly*1.05,0)+" L)<br>Agua desmineralizada: <b>"+fmt(wat,0)+" L</b><br>Precarga del vaso: <b>"+fmt(p0,1)+" bar</b><br>";
-    if(pmax<=p0){ res += "⚠️ La presión máxima ("+fmt(pmax,1)+" bar) no supera la precarga: revisa altura y tarado."; }
-    else {
-      var vn = total*e/(1-((p0+1)/(pmax+1)));
-      res += "Vaso de expansión mínimo: <b>"+fmt(vn*1.0,0)+" L</b> (elige el comercial inmediatamente superior)";
-    }
-    $("g-out").innerHTML = res;
-  });
-
-  $("f-btn").addEventListener("click", function(){
-    var kw = parseFloat($("f-kw").value), dt = parseFloat($("f-dt").value), pct = parseInt($("f-pct").value,10);
-    if(isNaN(kw)||isNaN(dt)||dt<=0||kw<=0){ $("f-out").textContent = "Datos inválidos."; return; }
-    var cp = {0:4.18,30:3.80,40:3.65,50:3.45}[pct], rho = {0:0.998,30:1.04,40:1.05,50:1.07}[pct];
-    var kgs = kw/(cp*dt), m3h = kgs/rho*3.6;
-    $("f-out").innerHTML = "Caudal: <b>"+fmt(m3h,1)+" m³/h</b> = "+fmt(m3h*1000/3600,2)+" L/s<br>cp ≈ "+cp+" kJ/kg·K (aprox.)";
-  });
-
-  $("a-btn").addEventListener("click", function(){
-    var kw = parseFloat($("a-kw").value), dt = parseFloat($("a-dt").value);
-    if(isNaN(kw)||isNaN(dt)||dt<=0){ $("a-out").textContent = "Datos inválidos."; return; }
-    var q = kw*1000/(0.34*dt);
-    $("a-out").innerHTML = "Caudal de aire: <b>"+fmt(q,0)+" m³/h</b> ("+fmt(q/3600,2)+" m³/s)<br>= "+fmt(kw*3412,0)+" BTU/h · "+fmt(kw/3.517,1)+" TR";
-  });
-
-  var PT = {
-    R410A:[[0,7.0],[5,8.3],[10,9.8],[40,23.2],[45,26.3],[50,29.6]],
-    R32:[[0,7.1],[5,8.5],[10,10.0],[40,23.8],[45,27.0],[50,30.3]],
-    R134a:[[0,1.9],[5,2.5],[10,3.1],[40,9.2],[45,10.6],[50,12.2]]
-  };
-  function renderPT(){
-    var d = PT[$("pt-gas").value], h = "<table><tr><th>Temp. sat. (°C)</th><th>Presión (bar g)</th></tr>";
-    d.forEach(function(r){ h += "<tr><td>"+r[0]+"</td><td>"+r[1]+"</td></tr>"; });
-    $("pt-out").innerHTML = h+"</table>";
-  }
-  $("pt-gas").addEventListener("change", renderPT); renderPT();
-
-  /* ---------- Assistant ---------- */
-  var KB = [
-   {k:"glicol mezcla porcentaje anticongelante litros",a:"<b>Glicol:</b> 30 % → −13 °C, 40 % → −23 °C, 50 % → −37 °C aprox. Elige la mezcla para la temperatura mínima de la zona con ~5 K de margen y no pases del 50 %. Litros de glicol = volumen total × %. Usa agua desmineralizada y glicol con inhibidores de un solo fabricante. Calcula el volumen en la pestaña Cálculo."},
-   {k:"presion llenado trabajo circuito grupo electrogeno bar",a:"<b>Presiones del circuito:</b> llenado en frío 1–1,5 bar (mín. H/10 + 0,5), trabajo 1,5–2,5 bar, válvula de seguridad ≈ 3 bar. Confirma los valores con el manual del motor."},
-   {k:"vaso expansion precarga",a:"<b>Vaso de expansión:</b> precarga ≈ H/10 + 0,3 bar, medida con el vaso aislado y sin presión de líquido. Se coloca en la aspiración de la bomba. Su tamaño: V × e / (1 − (P0+1)/(Pmax+1)), calculado en la pestaña Cálculo."},
-   {k:"valvula valvuleria corte bola mariposa retencion",a:"<b>Valvulería:</b> corte (bola/mariposa PN16) para aislar equipos, retención tras la bomba, filtro Y en aspiración, equilibrado si hay ramas, purgadores en puntos altos y drenaje en bajos. Juntas EPDM aptas para glicol. En servicio, todas abiertas."},
-   {k:"manometro termometro escala presion lectura",a:"<b>Manómetros:</b> 0–6 o 0–10 bar con glicerina y llave de aislamiento. Pon uno en cada lado de la bomba y termómetros en ida y retorno. Si baja la presión hay fuga; si sube mucho, revisa el vaso o el aire en el circuito."},
-   {k:"aerorrefrigerador dry cooler ventiladores ubicacion",a:"<b>Aerorrefrigerador:</b> entrada arriba, salida abajo, purgador en el punto alto, drenaje en el bajo. Ubicación con aire libre y sin recirculación, compensadores de vibración y ventiladores con control por temperatura del agua."},
-   {k:"purgar aire purga purgador cavitacion ruido",a:"<b>Purga:</b> llena despacio, abre los purgadores de los puntos altos, haz circular la bomba y repite a las 24 h. El aire da cavitación, ruido y falta de refrigeración."},
-   {k:"temperatura ida retorno salto delta motor",a:"<b>Temperaturas:</b> ida del motor 85–95 °C, ΔT 5–10 K. Para calcular el caudal con los kW de calor, usa la calculadora de caudal de glicol."},
-   {k:"split ciclo frigorifico presiones r410a baja alta",a:"<b>Split R410A:</b> baja 8–10 bar g (evaporación 5–10 °C), alta 23–30 bar g (condensación 40–50 °C). Sobrecalentamiento 5–8 K, subenfriamiento 4–8 K."},
-   {k:"vacio nitrogeno soldadura estanqueidad carga gas f-gas",a:"<b>Puesta en obra frigorífica:</b> soldar con nitrógeno, prueba de presión, vacío a 500 micrones y carga solo por personal con certificado F-Gas. Cumple RD 552/2019 y el libro de registro del equipo."},
-   {k:"tecnair stulz dx 35 kw sala oba precision clima",a:"<b>Equipo DX 35 kW:</b> unidad de precisión con compresores scroll, válvula de expansión electrónica, evaporador, ventilador EC y condensador remoto. Consigna 22–24 °C y 40–60 % HR. Aire ≈ 10.300 m³/h para ΔT 10 K. Líneas: gas caliente y líquido hacia el condensador. Mira el esquema 'DX 35 kW'."},
-   {k:"trampa aceite ascendente tuberia pendiente",a:"<b>Trampa de aceite:</b> en ascendentes de gas caliente/aspiración, una cada 6–7 m de altura, con curva en U soldada, para devolver el aceite al compresor. Sigue el detalle del fabricante."},
-   {k:"caudal aire m3/h kw calculo",a:"<b>Aire:</b> Q (m³/h) = kW·1000 / (0,34·ΔT). Para 35 kW y ΔT 10 K son ≈ 10.300 m³/h."},
-   {k:"condensados desague humidificador fuga",a:"<b>Condensados:</b> desagüe con sifón y pendiente, bandeja y detección de fugas. El humidificador necesita agua con válvula y filtro. Ponlos en el BMS como alarma."},
-   {k:"redundancia n+1 alarma bms",a:"<b>Redundancia:</b> en sala técnica se usa N+1 con rotación y alternancia automática. Alarmas por contacto seco, Modbus o SNMP al BMS."},
-   {k:"puesta en marcha arranque checklist",a:"<b>Puesta en marcha:</b> revisa la pestaña 'Check': llenado, purgas, presión, giro de bomba y ventiladores, filtro Y, temperaturas y alarmas, además del vacío y presostatos si es frigorífico."}
-  ];
-  function norm(s){ return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9+\s]/g," "); }
-  function answer(q){
-    var words = norm(q).split(/\s+/).filter(function(w){return w.length>2;});
-    var best = null, bs = 0;
-    KB.forEach(function(e){
-      var keys = e.k.split(" "), sc = 0;
-      words.forEach(function(w){ keys.forEach(function(k){ if(k.indexOf(w)===0 || (w.length>3 && k.indexOf(w)>-1) || (k.length>3 && w.indexOf(k)===0)) sc++; }); });
-      if(sc>bs){ bs = sc; best = e; }
-    });
-    if(!best) return "No tengo ese dato en mi base. Prueba con: glicol, vaso de expansión, presiones, válvulas, manómetros, split, DX 35 kW o checklists. Para una consulta que no esté, necesita conectarse a un servicio de IA externo.";
-    return best.a;
-  }
-  function addMsg(txt, who){
-    var d = document.createElement("div"); d.className = "msg "+who; d.innerHTML = txt;
-    $("chat").appendChild(d); $("chat").scrollTop = $("chat").scrollHeight;
-  }
-  function send(q){
-    q = q.trim(); if(!q) return;
-    addMsg(q.replace(/</g,"&lt;"),"user"); addMsg(answer(q),"bot"); $("ai-q").value = "";
-  }
-  addMsg("Hola 👋 Soy tu asistente de obra. Pregúntame por glicol, presiones, válvulas, manómetros, split o el equipo DX de 35 kW.","bot");
-  var qs = ["¿Cuánto glicol?","¿Presión de trabajo?","¿Precarga del vaso?","Presiones split R410A","Equipo DX 35 kW"];
-  var qh = ""; qs.forEach(function(q){ qh += '<button class="chip">'+q+'</button>'; });
-  $("ai-chips").innerHTML = qh;
-  $("ai-chips").addEventListener("click", function(e){ var b = e.target.closest(".chip"); if(b) send(b.textContent); });
-  $("ai-btn").addEventListener("click", function(){ send($("ai-q").value); });
-  $("ai-q").addEventListener("keydown", function(e){ if(e.key==="Enter") send($("ai-q").value); });
-
-  /* ---------- Checklists ---------- */
-  var CL = {
-    gen:{t:"Circuito grupo electrógeno",items:["Tuberías limpias y prueba de presión realizada","Válvulas de corte abiertas e identificadas","Precarga del vaso medida y ajustada","Filtro Y instalado y limpio","Llenado con mezcla preparada (% glicol verificado)","Purga de aire en puntos altos","Presión en frío dentro de rango (1–1,5 bar)","Sentido de giro de bomba correcto","Ventiladores del aerorrefrigerador giran y arrancan por escalones","Sin fugas tras 1 h en marcha","Reapretar, purgar y limpiar filtro a las 24 h","Válvula de seguridad canalizada a descarga segura"]},
-    split:{t:"Split / frigorífico",items:["Soldaduras con nitrógeno","Prueba de estanqueidad con nitrógeno","Vacío a 500 micrones mantenido","Aislamiento de aspiración completo","Desagüe de condensados con pendiente","Carga de gas por personal certificado","Sobrecalentamiento y subenfriamiento medidos","Intensidades dentro de placa","Libro de registro del equipo rellenado"]},
-    dx:{t:"DX 35 kW sala técnica",items:["Equipo nivelado y anclado","Trampas de aceite instaladas en ascendentes","Vacío y carga según fabricante","Condensador remoto sin recirculación de aire","Cableado de potencia y control revisado","Consigna ajustada (temperatura y HR)","Condensados y humidificador conectados","Alarmas probadas hacia el BMS","Prueba de rotación N+1","Paneles ciegos en racks y flujo de aire revisado","Informe de pruebas entregado al cliente"]}
-  };
-  var curC = "gen";
-  function loadState(k){ try{ return JSON.parse(localStorage.getItem("obratech_"+k)||"{}"); }catch(e){ return {}; } }
-  function saveState(k,s){ try{ localStorage.setItem("obratech_"+k, JSON.stringify(s)); }catch(e){} }
-  function renderChk(k){
-    curC = k; var st = loadState(k), h = "";
-    CL[k].items.forEach(function(it,i){
-      h += '<label class="chk" style="margin:0;color:#e2e8f0;font-size:14px"><input type="checkbox" data-i="'+i+'"'+(st[i]?' checked':'')+'><span>'+it+'</span></label>';
-    });
-    $("chk-list").innerHTML = h;
-    document.querySelectorAll("#chk-chips .chip").forEach(function(c){ c.classList.toggle("active", c.getAttribute("data-k")===k); });
-  }
-  var ch = ""; Object.keys(CL).forEach(function(k){ ch += '<button class="chip" data-k="'+k+'">'+CL[k].t+'</button>'; });
-  $("chk-chips").innerHTML = ch;
-  $("chk-chips").addEventListener("click", function(e){ var b = e.target.closest(".chip"); if(b) renderChk(b.getAttribute("data-k")); });
-  $("chk-list").addEventListener("change", function(e){
-    var i = e.target.getAttribute("data-i"); if(i===null) return;
-    var st = loadState(curC); st[i] = e.target.checked; saveState(curC, st);
-  });
-  $("chk-reset").addEventListener("click", function(){ saveState(curC, {}); renderChk(curC); });
-  renderChk("gen");
+/* ---------- Checklists ---------- */
+var CL={
+ats:{t:"Cuadro ATS",items:["Cuadro nivelado y anclado, IEC 61439","Barras rotuladas y par con llave dinamométrica","Misma secuencia de fases en red y GE","Q1 y Q2 con poder de corte validado","Enclavamiento mecánico y eléctrico probado","4 polos o criterio de neutro confirmado","Cableado de control apantallado y separado","Contacto de arranque del GE verificado","Tiempos ajustados (caída, transferencia, retorno, enfriamiento)","Megado de potencia y control","Transferencia real con corte de red","Retorno a red y enfriamiento comprobados","Alarmas y estados llegan al BMS","Esquemas as-built y rotulado final"]},
+ssaa:{t:"SSAA y control",items:["Cuadro SSAA en barra respaldada","Protecciones de motores, resistencias y diferenciales","Calentador alimentado con GE parado","Cargador con flotación correcta","Tensión de baterías y bornes","Ventiladores del aero: giro e intensidad","Bomba de trasiego y flotadores probados","Compuertas abren al arrancar el GE","Emergencia en cadena NC probada","Alarmas del controlador simuladas","Tierras y equipotencialidad medidas","Protocolo firmado"]},
+pru:{t:"Pruebas GE 600 kVA",items:["Aceite, refrigerante y combustible revisados","Baterías cargadas y conectadas","Circuito de glicol purgado y a presión","Arranque en vacío: 400 V y 50 Hz","Presión de aceite y temperatura en rango","Sin fugas ni vibraciones anormales","Banco de cargas 25–50–75–100 %","V, I, kW, temperaturas y presiones anotadas","Transferencia real con corte de red","Fallo de arranque y alarmas probados","Paro por emergencia","Protocolos entregados y formación"]},
+gen:{t:"Circuito GE",items:["Tuberías limpias y prueba de presión","Válvulas abiertas e identificadas","Precarga del vaso ajustada","Filtro Y limpio","Llenado con mezcla preparada","Purga en puntos altos","Presión en frío 1–1,5 bar","Sentido de giro de bomba","Ventiladores del aero por escalones","Sin fugas tras 1 h","Reapretar, purgar y limpiar filtro a las 24 h","Válvula de seguridad canalizada"]},
+dx:{t:"DX 35 kW / OBA",items:["Equipo nivelado y anclado","Trampas de aceite instaladas","Vacío y carga según fabricante","Condensador sin recirculación","Cableado de potencia y control revisado","Consigna ajustada","Condensados y humidificador conectados","Alarmas probadas hacia el BMS","Prueba de rotación N+1","Paneles ciegos y flujo de aire revisado","Informe de pruebas entregado"]}
+};
+var curC="ats";
+function ld(k){try{return JSON.parse(localStorage.getItem("obratech_"+k)||"{}");}catch(e){return {};}}
+function sv(k,s){try{localStorage.setItem("obratech_"+k,JSON.stringify(s));}catch(e){}}
+function renderChk(k){
+ curC=k;var st=ld(k),h="";
+ CL[k].items.forEach(function(it,i){h+='<label class="chk" style="margin:0;color:#e2e8f0;font-size:14px"><input type="checkbox" data-i="'+i+'"'+(st[i]?' checked':'')+'><span>'+it+'</span></label>';});
+ $("chk-list").innerHTML=h;
+ document.querySelectorAll("#chk-chips .chip").forEach(function(c){c.classList.toggle("active",c.getAttribute("data-k")===k);});
+}
+var ch="";Object.keys(CL).forEach(function(k){ch+='<button class="chip" data-k="'+k+'">'+CL[k].t+'</button>';});
+$("chk-chips").innerHTML=ch;
+$("chk-chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(b)renderChk(b.getAttribute("data-k"));});
+$("chk-list").addEventListener("change",function(e){var i=e.target.getAttribute("data-i");if(i===null)return;var s=ld(curC);s[i]=e.target.checked;sv(curC,s);});
+$("chk-reset").addEventListener("click",function(){sv(curC,{});renderChk(curC);});
+renderChk("ats");
 })();
 </script>
 </body>
