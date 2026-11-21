@@ -1,0 +1,216 @@
+<html data-type="html" data-identifier="c3d9a1f6-72be-4e55-8a0d-5b1e94c7f2a8" data-title="ObraTech Aprende - Lecciones ilustradas" data-version="1" width="600" height="800">
+<body>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
+.app{max-width:700px;margin:0 auto;padding:14px 14px 40px}
+h1{font-size:24px;margin:6px 0 0;color:#38bdf8}
+.sub{margin:3px 0 12px;color:#94a3b8;font-size:13px}
+.view{display:none}.view.active{display:block}
+.lcard{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:#1e293b;border:1px solid #334155;border-radius:16px;padding:14px;margin-top:10px;color:#e2e8f0;cursor:pointer}
+.lcard .ic{font-size:30px;flex:0 0 44px;text-align:center}
+.lcard b{display:block;font-size:16px;color:#f8fafc}
+.lcard span.d{display:block;font-size:12px;color:#94a3b8;margin-top:2px}
+.lcard span.n{display:inline-block;font-size:11px;color:#38bdf8;margin-top:4px}
+.top{display:flex;align-items:center;gap:10px}
+.back{background:#1e293b;border:1px solid #334155;color:#e2e8f0;border-radius:12px;padding:9px 13px;font-size:14px;cursor:pointer}
+.ltitle{font-size:16px;margin:0;color:#f8fafc}
+.bar{height:6px;background:#334155;border-radius:4px;margin:12px 0;overflow:hidden}
+.bar i{display:block;height:100%;background:#38bdf8;width:0;transition:width .3s}
+.lesson{display:none}.lesson.active{display:block}
+.step{display:none;animation:fade .3s ease}.step.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
+.step img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;background:#1e293b;display:block;border:1px solid #334155}
+.step h3{font-size:19px;margin:14px 0 6px;color:#f8fafc}
+.step p{font-size:15px;line-height:1.6;margin:0;color:#cbd5e1}
+.tip{margin-top:12px;padding:10px 12px;border-radius:12px;background:#0b2a3a;border-left:4px solid #38bdf8;font-size:13px;line-height:1.5;color:#bae6fd}
+.nav{display:flex;gap:10px;margin-top:16px}
+.nav button{flex:1;padding:14px;font-size:16px;font-weight:600;border:none;border-radius:12px;cursor:pointer}
+.prev{background:#334155;color:#e2e8f0}
+.next{background:#0ea5e9;color:#fff}
+.nav button:disabled{opacity:.35}
+.dots{display:flex;justify-content:center;gap:6px;margin-top:12px}
+.dots i{width:8px;height:8px;border-radius:50%;background:#475569}
+.dots i.on{background:#38bdf8}
+.warn{font-size:12px;color:#fbbf24;background:#422006;border-radius:10px;padding:8px 10px;margin-top:16px;line-height:1.5}
+</style>
+
+<div class="app">
+  <h1 id="t-main">🎓 ObraTech Aprende</h1>
+  <p class="sub" id="t-sub">Entiende cómo funciona cada sistema, paso a paso y con imágenes</p>
+
+  <div class="view active" id="v-home">
+    <button class="lcard" data-open="1"><span class="ic">🔥</span><div><b>Refrigeración del grupo electrógeno</b><span class="d">Del motor caliente al aerorrefrigerador y vuelta</span><span class="n">4 tarjetas</span></div></button>
+    <button class="lcard" data-open="2"><span class="ic">❄️</span><div><b>Cómo funciona un split</b><span class="d">El ciclo frigorífico explicado de forma visual</span><span class="n">3 tarjetas</span></div></button>
+    <button class="lcard" data-open="3"><span class="ic">🧊</span><div><b>Clima de precisión DX 35 kW (sala OBA)</b><span class="d">Aire, refrigerante, condensador remoto y redundancia</span><span class="n">4 tarjetas</span></div></button>
+    <button class="lcard" data-open="4"><span class="ic">🔀</span><div><b>Cuadro de conmutación (ATS)</b><span class="d">Qué pasa desde que cae la red hasta que vuelve</span><span class="n">4 tarjetas</span></div></button>
+    <button class="lcard" data-open="5"><span class="ic">🔌</span><div><b>SSAA del grupo electrógeno</b><span class="d">Lo que mantiene el grupo listo para arrancar</span><span class="n">3 tarjetas</span></div></button>
+    <div class="warn" id="p-warn">⚠️ Las ilustraciones son esquemáticas y sirven para entender el flujo. Para ejecutar la obra mandan siempre los planos del proyecto y el manual del fabricante.</div>
+  </div>
+
+  <div class="view" id="v-lesson">
+    <div class="top"><button class="back" id="btn-back">← Lecciones</button><h2 class="ltitle" id="lt-title"></h2></div>
+    <div class="bar"><i id="bar-fill"></i></div>
+
+    <!-- LECCIÓN 1 -->
+    <div class="lesson" data-lesson="1" data-name="🔥 Refrigeración del grupo">
+      <div class="step">
+        <img data-src="Photorealistic 3D cutaway of a large industrial diesel generator set 600 kVA in a clean generator room, engine block glowing orange-red to show heat inside the water jackets, red arrows showing hot coolant leaving the engine, no text, cinematic lighting, in a technical photorealistic render style" alt="Motor del grupo generando calor">
+        <h3 id="l1s1h">1. El motor genera calor</h3>
+        <p id="l1s1p">Un motor diésel convierte solo parte del combustible en energía. El resto se convierte en calor que hay que sacar, o el motor se funde. Por eso circula agua con glicol por las camisas del motor.</p>
+        <div class="tip">💡 Lo normal es que el líquido salga del motor a unos 85–95 °C.</div>
+      </div>
+      <div class="step">
+        <img data-src="Photorealistic 3D cutaway of an industrial water circulation pump and thermostat valve with Y strainer and shut-off butterfly valves on insulated steel pipes in a generator room, blue and red flow arrows showing coolant direction, pressure gauges on the pipes, no text, in a technical photorealistic render style" alt="Bomba, termostato y válvulas">
+        <h3 id="l1s2h">2. La bomba mueve y el termostato decide</h3>
+        <p id="l1s2p">La bomba empuja el líquido por el circuito. Mientras el motor está frío, el termostato lo hace recircular por dentro para calentarse rápido. Cuando alcanza temperatura, abre el paso hacia el aerorrefrigerador.</p>
+        <div class="tip">💡 Las válvulas de corte permiten aislar la bomba o el motor sin vaciar todo el circuito. En marcha, siempre abiertas.</div>
+      </div>
+      <div class="step">
+        <img data-src="Photorealistic aerial view of a large rooftop dry cooler with several big fans spinning, finned coil heat exchanger, hot red air shimmer rising and cool blue arrows showing ambient air passing through the coil, industrial building rooftop at sunset, no text, in a technical photorealistic render style" alt="Aerorrefrigerador en cubierta">
+        <h3 id="l1s3h">3. El aerorrefrigerador tira el calor al aire</h3>
+        <p id="l1s3p">El líquido caliente entra por arriba a la batería de aletas. Los ventiladores empujan aire exterior a través de ella y el líquido se enfría. Vuelve al motor unos 5–10 grados más frío.</p>
+        <div class="tip">💡 Si las aletas están sucias o el aire recircula, el grupo se calienta aunque todo "funcione".</div>
+      </div>
+      <div class="step">
+        <img data-src="Photorealistic close-up of an expansion vessel with a pressure gauge, an automatic air vent on a high point of a pipe and a safety relief valve with a discharge pipe, glycol circuit in an industrial plant room, blue accents, no text, in a technical photorealistic render style" alt="Vaso de expansión, purgador y válvula de seguridad">
+        <h3 id="l1s4h">4. Vaso, purgador y seguridad</h3>
+        <p id="l1s4p">El líquido se dilata al calentarse. El vaso de expansión absorbe ese aumento para que no suba la presión sin control. El purgador saca el aire de los puntos altos y la válvula de seguridad protege si algo falla.</p>
+        <div class="tip">💡 El aire en el circuito causa ruidos, presiones que oscilan y mala refrigeración. Purga de nuevo a las 24 horas.</div>
+      </div>
+    </div>
+
+    <!-- LECCIÓN 2 -->
+    <div class="lesson" data-lesson="2" data-name="❄️ Split">
+      <div class="step">
+        <img data-src="Photorealistic split air conditioner system, indoor wall unit and outdoor unit connected by insulated copper pipes through a wall, translucent cutaway showing the refrigerant flowing in a loop, red arrows for hot high pressure gas, blue arrows for cold low pressure, no text, in a technical photorealistic render style" alt="Visión general del split">
+        <h3 id="l2s1h">1. Un circuito cerrado que "transporta" el calor</h3>
+        <p id="l2s1p">Un split no fabrica frío: mueve calor de dentro a fuera. El refrigerante circula en un circuito cerrado entre la unidad interior y la exterior, cambiando de líquido a gas y de gas a líquido.</p>
+      </div>
+      <div class="step">
+        <img data-src="Photorealistic cutaway of an air conditioner outdoor unit showing a scroll compressor, finned condenser coil and fan, hot red refrigerant gas entering the condenser and warm air blowing out, copper pipes, no text, in a technical photorealistic render style" alt="Unidad exterior: compresor y condensador">
+        <h3 id="l2s2h">2. Compresor y condensador (fuera)</h3>
+        <p id="l2s2p">El compresor aprieta el gas y lo calienta mucho. En el condensador, el ventilador lo enfría con aire exterior y el gas se convierte en líquido, soltando el calor fuera del edificio.</p>
+        <div class="tip">💡 Si el condensador está sucio, la presión de alta sube y el equipo salta por protección.</div>
+      </div>
+      <div class="step">
+        <img data-src="Photorealistic cutaway of an indoor air conditioner unit showing an evaporator coil with condensation droplets, a drain pan with a drain pipe, electronic expansion valve at coil inlet, cool blue air flowing into a room, no text, in a technical photorealistic render style" alt="Unidad interior: expansión y evaporador">
+        <h3 id="l2s3h">3. Expansión y evaporador (dentro)</h3>
+        <p id="l2s3p">El líquido pasa por la válvula de expansión y baja de presión: se enfría mucho. En el evaporador absorbe el calor del aire de la sala y vuelve a ser gas. El agua que condensa sale por el desagüe, que debe llevar pendiente.</p>
+        <div class="tip">💡 Antes de cargar gas en obra se hace vacío (menos de 500 micras) y prueba con nitrógeno.</div>
+      </div>
+    </div>
+
+    <!-- LECCIÓN 3 -->
+    <div class="lesson" data-lesson="3" data-name="🧊 DX 35 kW / OBA">
+      <div class="step">
+        <img data-src="Photorealistic data center telecom equipment room with two rows of server racks forming a cold aisle and a hot aisle, large precision air conditioning unit at the end of the row, blue arrows for cold air through the raised floor and red arrows for hot air returning above, no text, in a technical photorealistic render style" alt="Flujo de aire en la sala técnica">
+        <h3 id="l3s1h">1. El aire recorre la sala</h3>
+        <p id="l3s1p">El equipo de precisión impulsa aire frío, normalmente por el suelo técnico, hacia el frente de los racks. Los equipos lo calientan y lo expulsan por detrás. Ese aire caliente vuelve al equipo y se vuelve a enfriar.</p>
+        <div class="tip">💡 Los paneles ciegos en los huecos de los racks evitan que el aire frío y el caliente se mezclen.</div>
+      </div>
+      <div class="step">
+        <img data-src="Photorealistic cutaway of a precision cooling unit 35 kW with two scroll compressors, evaporator coil, EC fans below, electronic expansion valve, humidifier and filters, labeled by color only, blue cool air at the bottom outlet, red hot return air at the top, no text, in a technical photorealistic render style" alt="Interior del equipo DX">
+        <h3 id="l3s2h">2. Por dentro del equipo DX</h3>
+        <p id="l3s2p">El aire caliente de la sala atraviesa los filtros y el evaporador, donde cede su calor al refrigerante. Los ventiladores EC lo devuelven frío. Dos compresores scroll comparten la carga y el humidificador mantiene la humedad.</p>
+      </div>
+      <div class="step">
+        <img data-src="Photorealistic view of a rooftop remote air-cooled condenser with two large fans connected by two insulated copper refrigerant pipes running down the wall of a building, one pipe for hot gas and one for liquid, oil trap loop visible on a vertical riser, no text, in a technical photorealistic render style" alt="Condensador remoto y líneas">
+        <h3 id="l3s3h">3. El calor sale por el condensador remoto</h3>
+        <p id="l3s3p">Dos tuberías unen el equipo interior con el condensador de cubierta. Por una sube el gas caliente y por la otra vuelve el líquido. En los tramos verticales hay trampas de aceite para devolver el aceite al compresor.</p>
+        <div class="tip">💡 El fabricante define los diámetros y las longitudes máximas. Respétalos.</div>
+      </div>
+      <div class="step">
+        <img data-src="Photorealistic telecom technical room with three precision cooling units, two running with green indicators and one standby, a technician checking an alarm panel connected to a monitoring system screen, cool lighting, no text, in a technical photorealistic render style" alt="Redundancia N+1 y alarmas">
+        <h3 id="l3s4h">4. Redundancia y alarmas</h3>
+        <p id="l3s4p">Con N+1 hay una unidad de más: si una falla, otra toma el relevo sin que la sala se caliente. Las unidades rotan para desgastarse por igual y sus alarmas llegan a la telegestión.</p>
+        <div class="tip">💡 Prueba siempre la conmutación entre unidades antes de entregar.</div>
+      </div>
+    </div>
+
+    <!-- LECCIÓN 4 -->
+    <div class="lesson" data-lesson="4" data-name="🔀 Conmutación ATS">
+      <div class="step">
+        <img data-src="Photorealistic low voltage transfer switchboard cabinet with two large motorized circuit breakers side by side, one connected to the utility grid and one to a generator, central busbars, green indicator showing the grid breaker closed and the generator breaker open, power flowing as a glowing amber line to the loads, no text, in a technical photorealistic render style" alt="Funcionamiento normal con red">
+        <h3 id="l4s1h">1. Funcionamiento normal: manda la red</h3>
+        <p id="l4s1p">El cuadro tiene dos interruptores motorizados: uno para la red y otro para el grupo. Con red buena, el de red está cerrado y alimenta toda la instalación. El del grupo permanece abierto.</p>
+        <div class="tip">💡 Nunca pueden estar cerrados a la vez. El enclavamiento lo impide.</div>
+      </div>
+      <div class="step">
+        <img data-src="Photorealistic control panel of an automatic transfer switch with a controller screen glowing red as it detects a grid failure, a dark facility in the background with emergency lights, the grid breaker opening with a visible spark-free mechanical motion, dramatic lighting, no text, in a technical photorealistic render style" alt="Fallo de red detectado">
+        <h3 id="l4s2h">2. Falla la red</h3>
+        <p id="l4s2p">El controlador vigila tensión y frecuencia de la red. Si se sale de los límites, espera unos segundos para no reaccionar a un microcorte. Si persiste, da la orden de arrancar el grupo.</p>
+      </div>
+      <div class="step">
+        <img data-src="Photorealistic large diesel generator set starting up in a generator room with exhaust and vibration, digital controller showing ready status, next to a transfer switchboard where the generator breaker closes and the grid breaker stays open, amber power flow to loads, UPS and rectifiers receiving power, no text, in a technical photorealistic render style" alt="Arranque y transferencia al grupo">
+        <h3 id="l4s3h">3. El grupo arranca y toma la carga</h3>
+        <p id="l4s3p">En pocos segundos el grupo arranca y alcanza 400 V y 50 Hz estables. Entonces el controlador cierra el interruptor del grupo. Mientras tanto, el SAI y las baterías mantienen alimentadas las cargas críticas.</p>
+        <div class="tip">💡 Esa pequeña pausa sin tensión es la razón por la que existen el SAI y las baterías.</div>
+      </div>
+      <div class="step">
+        <img data-src="Photorealistic transfer switchboard where the grid breaker closes again and the generator breaker opens, green indicators of restored grid, the generator in the background running idle cooling down with a small exhaust haze, calm lighting, no text, in a technical photorealistic render style" alt="Retorno a red y enfriamiento">
+        <h3 id="l4s4h">4. Vuelve la red</h3>
+        <p id="l4s4p">Cuando la red vuelve, el controlador espera varios minutos para asegurarse de que es estable. Luego transfiere la carga a la red y deja el grupo funcionando en vacío unos minutos para enfriarse antes de pararlo.</p>
+        <div class="tip">💡 La prueba que más vale es un corte real de red antes de la entrega.</div>
+      </div>
+    </div>
+
+    <!-- LECCIÓN 5 -->
+    <div class="lesson" data-lesson="5" data-name="🔌 SSAA del grupo">
+      <div class="step">
+        <img data-src="Photorealistic close-up of a diesel generator engine with an electric jacket water heater, a battery charger on the wall connected to two 12V batteries in series, small glowing amber indicators showing standby power from an auxiliary panel, no text, in a technical photorealistic render style" alt="Calentador y baterías">
+        <h3 id="l5s1h">1. Mantener el grupo listo</h3>
+        <p id="l5s1p">Un grupo de emergencia debe arrancar a la primera y tomar carga en segundos. Por eso, con el grupo parado, un calentador mantiene el motor templado y un cargador mantiene las baterías de arranque llenas.</p>
+        <div class="tip">💡 Si estos servicios se quedan sin tensión, el grupo puede fallar justo cuando se necesita.</div>
+      </div>
+      <div class="step">
+        <img data-src="Photorealistic generator room with motorized louvers opening on the intake and discharge walls, air flowing in and out in blue and red arrows, a rooftop dry cooler with fans running in the background, fuel day tank with level float switch, no text, in a technical photorealistic render style" alt="Compuertas, aero y combustible">
+        <h3 id="l5s2h">2. Aire, refrigeración y combustible</h3>
+        <p id="l5s2p">Cuando el grupo arranca, las compuertas de la sala se abren y los ventiladores del aerorrefrigerador entran en servicio. Una bomba de trasiego rellena el depósito diario cuando los flotadores indican nivel bajo.</p>
+        <div class="tip">💡 Todo esto cuelga del cuadro de SSAA, alimentado desde una barra respaldada por el grupo.</div>
+      </div>
+      <div class="step">
+        <img data-src="Photorealistic control cabinet of a generator with a digital controller screen, neatly labeled shielded control cables going to a transfer switch and to a building monitoring system, status lights green and one alarm light amber, technician hand pointing at the panel, no text, in a technical photorealistic render style" alt="Señales hacia ATS y BMS">
+        <h3 id="l5s3h">3. Las señales cuentan qué pasa</h3>
+        <p id="l5s3p">El grupo se comunica con el cuadro de conmutación mediante contactos: orden de arranque, grupo en marcha y listo para cargar. Además envía alarmas a la telegestión. Estos cables van apantallados y separados de los de potencia.</p>
+        <div class="tip">💡 Simula cada alarma en la puesta en marcha y confirma que llega al BMS.</div>
+      </div>
+    </div>
+
+    <div class="dots" id="dots"></div>
+    <div class="nav"><button class="prev" id="btn-prev">← Anterior</button><button class="next" id="btn-next">Siguiente →</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i);};
+  var cur=null,steps=[],idx=0;
+  function show(){
+    steps.forEach(function(s,i){s.classList.toggle("active",i===idx);});
+    var dots="";steps.forEach(function(s,i){dots+='<i class="'+(i===idx?'on':'')+'"></i>';});
+    $("dots").innerHTML=dots;
+    $("bar-fill").style.width=((idx+1)/steps.length*100)+"%";
+    $("btn-prev").disabled=idx===0;
+    $("btn-next").textContent=idx===steps.length-1?"✓ Terminar":"Siguiente →";
+    window.scrollTo(0,0);
+  }
+  function openLesson(n){
+    document.querySelectorAll(".lesson").forEach(function(l){l.classList.remove("active");});
+    cur=document.querySelector('.lesson[data-lesson="'+n+'"]');
+    cur.classList.add("active");
+    steps=[].slice.call(cur.querySelectorAll(".step"));
+    idx=0;
+    $("lt-title").textContent=cur.getAttribute("data-name");
+    $("v-home").classList.remove("active");$("v-lesson").classList.add("active");
+    show();
+  }
+  function home(){$("v-lesson").classList.remove("active");$("v-home").classList.add("active");window.scrollTo(0,0);}
+  document.querySelectorAll("[data-open]").forEach(function(b){b.addEventListener("click",function(){openLesson(b.getAttribute("data-open"));});});
+  $("btn-back").addEventListener("click",home);
+  $("btn-prev").addEventListener("click",function(){if(idx>0){idx--;show();}});
+  $("btn-next").addEventListener("click",function(){if(idx<steps.length-1){idx++;show();}else{home();}});
+})();
+</script>
+</body>
+</html>
