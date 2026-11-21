@@ -572,5 +572,16 @@ $("chk-reset").addEventListener("click",function(){sv(curC,{});renderChk(curC);}
 renderChk("ats");
 })();
 </script>
+
+<script>
+document.querySelectorAll("img[data-src]").forEach(function(img,i){
+  var p=img.getAttribute("data-src");
+  img.loading="lazy";
+  img.src="https://image.pollinations.ai/prompt/"+encodeURIComponent(p)+"?width=768&height=1024&nologo=true&seed="+(i+1);
+  img.addEventListener("error",function(){
+    if(!img.dataset.retry){img.dataset.retry=1;setTimeout(function(){img.src=img.src+"&r=2";},4000);}
+  });
+});
+</script>
 </body>
 </html>
